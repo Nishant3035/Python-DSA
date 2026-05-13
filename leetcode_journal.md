@@ -6,17 +6,18 @@
 
 ## Progress Tracker
 
-| No  | Problem                 | Difficulty | Pattern              | Hint? | Date     |
-|-----|-------------------------|------------|----------------------|-------|----------|
-| 283 | Move Zeroes             | Easy       | Array                | No    | May 8    |
-| 9   | Palindrome Number       | Easy       | Math                 | No    | May 8    |
-| 268 | Missing Number          | Easy       | Math                 | Yes   | May 9    |
-| 217 | Contains Duplicate      | Easy       | Hash — Set           | No    | May 9    |
-| 66  | Plus One                | Easy       | Array — Loop         | No    | May 10   |
-| 485 | Max Consecutive Ones    | Easy       | Array — Counter      | No    | May 10   |
-| 136 | Single Number           | Easy       | Bit — XOR            | No    | May 11   |
+| No  | Problem                 | Difficulty | Pattern               | Hint? | Date     |
+|-----|-------------------------|------------|-----------------------|-------|----------|
+| 283 | Move Zeroes             | Easy       | Array                 | No    | May 8    |
+| 9   | Palindrome Number       | Easy       | Math                  | No    | May 8    |
+| 268 | Missing Number          | Easy       | Math                  | Yes   | May 9    |
+| 217 | Contains Duplicate      | Easy       | Hash — Set            | No    | May 9    |
+| 66  | Plus One                | Easy       | Array — Loop          | No    | May 10   |
+| 485 | Max Consecutive Ones    | Easy       | Array — Counter       | No    | May 10   |
+| 136 | Single Number           | Easy       | Bit — XOR             | No    | May 11   |
+| 14  | Longest Common Prefix   | Easy       | String — Prefix       | Yes   | May 13   |
 
-**Total solved: 7 | Easy: 7 | Medium: 0 | Hard: 0**
+**Total solved: 8 | Easy: 8 | Medium: 0 | Hard: 0**
 
 ---
 
@@ -263,6 +264,44 @@ def singleNumber(nums):
 **Time:** O(n) | **Space:** O(1)
 
 ---
+
+## LC 14 – Longest Common Prefix
+**Date:** May 13, 2026
+**Difficulty:** Easy
+**Pattern:** String — Shrinking Prefix
+**Hint needed:** Yes — full explanation
+
+**Approach:**
+Take first word as starting prefix. Loop through every word.
+While current word does not start with prefix — shrink prefix
+by removing last character. After all words checked — return prefix.
+
+**Solution:**
+```python
+def longestCommonPrefix(strs):
+    prefix = strs[0]
+    for word in strs:
+        while not word.startswith(prefix):
+            prefix = prefix[:-1]
+    return prefix
+```
+
+**Syntax & Inbuilt Features Learned:**
+| Syntax / Feature            | What it means                                      |
+|-----------------------------|----------------------------------------------------|
+| `word.startswith(prefix)`   | Returns True if word begins with prefix            |
+| `prefix[:-1]`               | Remove last character from string                  |
+| `not`                       | Flips True to False and False to True              |
+| `while` inside `for`        | Inner loop keeps running until condition is met    |
+| `[]` vs `()`                | Square brackets for slicing, round for function call |
+
+**Time:** O(n*m) | **Space:** O(1)
+
+---
+
+
+
+
 
 ## Template — copy this for every new problem
 
