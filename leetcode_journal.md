@@ -21,8 +21,10 @@
 | 13  | Roman to Integer        | Easy       | Hash — SubtractiveRule | Yes   | May 13 |
 | 26  | Remove Duplicate Sorted | Easy       | Array — Two Pointer    | No    | May 13 |
 | 1   | Two Sum                 | Easy       | Hash — Complement      | No    | May 13 |
+| 169 | Majority Element        | Easy       | Hash — Dictionary      | No    | May 15 |
+| 344 | Reverse String          | Easy       | Array — Built-in       | No    | May 15 |
 
-**Total solved: 12 | Easy: 12 | Medium: 0 | Hard: 0**
+**Total solved: 14 | Easy: 14 | Medium: 0 | Hard: 0**
 
 ---
 
@@ -476,6 +478,78 @@ def twoSum(nums, target):
 | One pass hashmap | Check complement BEFORE storing — handles duplicates|
 
 **Time:** O(n) | **Space:** O(n)
+
+---
+
+## LC 169 – Majority Element
+
+**Date:** May 15, 2026
+**Difficulty:** Easy
+**Pattern:** Hash — Dictionary
+**Hint needed:** No
+
+**Approach:**
+Build frequency dict using dict.get(). Loop through all keys.
+Return the key whose count is greater than n/2.
+Majority element always exists (guaranteed by problem).
+
+**Solution:**
+```python
+def majorityElement(nums):
+    hash_map = dict()
+    n = len(nums)
+    for i in range(0, n):
+        hash_map[nums[i]] = hash_map.get(nums[i], 0) + 1
+    for key in hash_map:
+        if hash_map[key] > n / 2:
+            return key
+```
+
+**Syntax & Inbuilt Features Learned:**
+| Syntax / Feature          | What it means                                           |
+|---------------------------|---------------------------------------------------------|
+| `hash_map.get(key, 0)+1`  | Safe frequency increment — 0 default if key missing    |
+| `for key in hash_map`     | Iterates over all keys in dictionary                    |
+| `hash_map[key]`           | Access value for a key                                  |
+| `> n / 2`                 | Majority means appears more than half the time          |
+| Alternative               | Boyer-Moore Voting Algorithm — O(1) space               |
+
+**Time:** O(n) | **Space:** O(n)
+
+---
+
+## LC 344 – Reverse String
+
+**Date:** May 15, 2026
+**Difficulty:** Easy
+**Pattern:** Array — Built-in / Two Pointer
+**Hint needed:** No
+
+**Approach:**
+Used built-in list .reverse() method which reverses in-place.
+Problem asks to modify input array in-place — .reverse() does exactly that.
+
+**Solution:**
+```python
+def reverseString(s):
+    s.reverse()
+    return s
+```
+
+**Syntax & Inbuilt Features Learned:**
+| Syntax / Feature   | What it means                                           |
+|--------------------|---------------------------------------------------------|
+| `s.reverse()`      | Inbuilt — reverses list IN-PLACE, returns None          |
+| In-place           | Modifies original list — no new list created — O(1) space |
+| Alternative 1      | Two pointer: `left, right = 0, len(s)-1` swap until middle |
+| Alternative 2      | Slicing: `s[:] = s[::-1]` — also in-place              |
+| `s[::-1]`          | Slice with step -1 — returns reversed copy (NOT in-place) |
+
+**Note:** `.reverse()` returns `None` — the `return s` works here
+because s is modified in-place. In interviews prefer two pointer
+approach to show you understand the underlying logic.
+
+**Time:** O(n) | **Space:** O(1)
 
 ---
 
