@@ -23,8 +23,9 @@
 | 1   | Two Sum                 | Easy       | Hash — Complement      | No    | May 13 |
 | 169 | Majority Element        | Easy       | Hash — Dictionary      | No    | May 15 |
 | 344 | Reverse String          | Easy       | Array — Built-in       | No    | May 15 |
+| 412 | Fizz Buzz               | Easy       | String — Loop          | No    | May 16 |
 
-**Total solved: 14 | Easy: 14 | Medium: 0 | Hard: 0**
+**Total solved: 15 | Easy: 15 | Medium: 0 | Hard: 0**
 
 ---
 
@@ -552,6 +553,48 @@ approach to show you understand the underlying logic.
 **Time:** O(n) | **Space:** O(1)
 
 ---
+
+## LC 412 – Fizz Buzz
+
+**Date:** May 16, 2026
+**Difficulty:** Easy
+**Pattern:** Array — Loop + Conditionals
+**Hint needed:** No
+
+**Approach:**
+Loop from 1 to n. Check divisibility using modulo.
+Check FizzBuzz (both) FIRST before checking Fizz or Buzz alone.
+Append string to result list. Return list.
+
+**Solution:**
+```python
+def fizzBuzz(n):
+    result = []
+    for i in range(1, n + 1):
+        if i % 15 == 0:
+            result.append("FizzBuzz")
+        elif i % 3 == 0:
+            result.append("Fizz")
+        elif i % 5 == 0:
+            result.append("Buzz")
+        else:
+            result.append(str(i))
+    return result
+```
+
+**Syntax & Inbuilt Features Learned:**
+| Syntax / Feature    | What it means                                           |
+|---------------------|---------------------------------------------------------|
+| `i % 15 == 0`       | Divisible by both 3 and 5 — check this FIRST           |
+| `i % 3 == 0`        | Divisible by 3                                          |
+| `i % 5 == 0`        | Divisible by 5                                          |
+| `str(i)`            | Convert integer to string                               |
+| `result.append(x)`  | Add element to end of list                              |
+| `range(1, n + 1)`   | Loop from 1 to n inclusive                             |
+| Order matters       | Check % 15 before % 3 and % 5 or FizzBuzz never hits  |
+
+**Time:** O(n) | **Space:** O(n)
+
 
 ## Template — copy for every new problem
 
