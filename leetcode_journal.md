@@ -24,8 +24,11 @@
 | 169 | Majority Element        | Easy       | Hash — Dictionary      | No    | May 15 |
 | 344 | Reverse String          | Easy       | Array — Built-in       | No    | May 15 |
 | 412 | Fizz Buzz               | Easy       | String — Loop          | No    | May 16 |
+| 1480| Running Sum of 1D Array | Easy       | Array — Prefix Sum     | No    | May 17 |
+| 383 | Ransom Note             | Easy       | Hash — Dictionary      | No    | May 17 |
+| 387 | First Unique Character  | Easy       | Hash — Dictionary      | Yes   | May 17 |
 
-**Total solved: 15 | Easy: 15 | Medium: 0 | Hard: 0**
+**Total solved: 18 | Easy: 18 | Medium: 0 | Hard: 0**
 
 ---
 
@@ -595,6 +598,110 @@ def fizzBuzz(n):
 
 **Time:** O(n) | **Space:** O(n)
 
+---
+
+## LC 1480 – Running Sum of 1D Array
+**Date:** May 17, 2026
+**Difficulty:** Easy
+**Pattern:** Array — Prefix Sum
+**Hint needed:** No
+
+**Approach:**
+Keep a running total. For each index add current element
+to curr_sum and overwrite nums[i] with curr_sum. Return nums.
+
+**Solution:**
+```python
+def runningSum(nums):
+    curr_sum = 0
+    n = len(nums)
+    for i in range(0, n):
+        curr_sum += nums[i]
+        nums[i] = curr_sum
+    return nums
+```
+
+**Syntax & Inbuilt Features Learned:**
+| Syntax / Feature    | What it means                                      |
+|---------------------|----------------------------------------------------|
+| `curr_sum += nums[i]`| Add current element to running total              |
+| `nums[i] = curr_sum` | Overwrite element with running sum — in-place     |
+| Prefix sum pattern  | Each index stores sum of all elements before it   |
+| In-place            | Modify original array — O(1) space                |
+
+**Time:** O(n) | **Space:** O(1)
+
+---
+
+## LC 383 – Ransom Note
+**Date:** May 17, 2026
+**Difficulty:** Easy
+**Pattern:** Hash — Dictionary
+**Hint needed:** No
+
+**Approach:**
+Build frequency dict from magazine. Then for each character
+in ransomNote check if count > 0. If not — return False.
+If yes — reduce count by 1. If all characters found — return True.
+
+**Solution:**
+```python
+def canConstruct(ransomNote, magazine):
+    hash_map = dict()
+    for i in magazine:
+        hash_map[i] = hash_map.get(i, 0) + 1
+    for char in ransomNote:
+        if hash_map.get(char, 0) == 0:
+            return False
+        hash_map[char] -= 1
+    return True
+```
+
+**Syntax & Inbuilt Features Learned:**
+| Syntax / Feature          | What it means                                      |
+|---------------------------|----------------------------------------------------|
+| `hash_map.get(char, 0)`   | Returns 0 if char not in dict — safe lookup        |
+| `hash_map[char] -= 1`     | Reduce count after using that letter               |
+| `== 0` check              | Letter not available — either missing or used up   |
+| Two loop pattern          | Build first, then consume — classic hash approach  |
+
+**Time:** O(n) | **Space:** O(n)
+
+---
+
+## LC 387 – First Unique Character in a String
+**Date:** May 17, 2026
+**Difficulty:** Easy
+**Pattern:** Hash — Dictionary
+**Hint needed:** Yes — loop structure
+
+**Approach:**
+Build frequency dict from string. Then loop through string
+using index. First character with count == 1 — return its index.
+If none found — return -1.
+
+**Solution:**
+```python
+def firstUniqChar(s):
+    hash_map = dict()
+    for i in s:
+        hash_map[i] = hash_map.get(i, 0) + 1
+    for i in range(len(s)):
+        if hash_map[s[i]] == 1:
+            return i
+    return -1
+```
+
+**Syntax & Inbuilt Features Learned:**
+| Syntax / Feature      | What it means                                          |
+|-----------------------|--------------------------------------------------------|
+| `hash_map[s[i]]`      | Access frequency of character at position i            |
+| `range(len(s))`       | Loop using index — needed to return position           |
+| `== 1`                | Unique means appears exactly once                      |
+| `return -1`           | Outside loop — no unique character found               |
+| Why not `for i in s`  | Need index not character — so use range(len(s))        |
+
+**Time:** O(n) | **Space:** O(n)
 
 ## Template — copy for every new problem
 
