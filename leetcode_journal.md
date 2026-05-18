@@ -27,8 +27,8 @@
 | 1480| Running Sum of 1D Array | Easy       | Array — Prefix Sum     | No    | May 17 |
 | 383 | Ransom Note             | Easy       | Hash — Dictionary      | No    | May 17 |
 | 387 | First Unique Character  | Easy       | Hash — Dictionary      | Yes   | May 17 |
-
-**Total solved: 18 | Easy: 18 | Medium: 0 | Hard: 0**
+| 2114| Maximum Words in Sentences| Easy     | Array — String Split   | Yes   | May 18 |
+**Total solved: 19 | Easy: 19 | Medium: 0 | Hard: 0**
 
 ---
 
@@ -702,6 +702,39 @@ def firstUniqChar(s):
 | Why not `for i in s`  | Need index not character — so use range(len(s))        |
 
 **Time:** O(n) | **Space:** O(n)
+
+## LC 2114 – Maximum Number of Words Found in Sentences
+**Date:** May 18, 2026
+**Difficulty:** Easy
+**Pattern:** Array — String Split
+**Hint needed:** Yes — split() method hint
+
+**Approach:**
+Loop through each sentence. Split each sentence by spaces
+to get list of words. Count words using len(). Track maximum
+count using comparison. Return max at end.
+
+**Solution:**
+```python
+def mostWordsFound(sentences):
+    max_sen = 0
+    for i in sentences:
+        sen = len(i.split())
+        if sen > max_sen:
+            max_sen = sen
+    return max_sen
+```
+
+**Syntax & Inbuilt Features Learned:**
+| Syntax / Feature      | What it means                                           |
+|-----------------------|---------------------------------------------------------|
+| `i.split()`           | Splits string by spaces — returns list of words         |
+| `len(i.split())`      | Count of words in sentence                              |
+| `for i in sentences`  | i is the sentence string directly — NOT an index        |
+| Common mistake        | `sentences[i]` fails — i is already the element        |
+| `if sen > max_sen`    | Track running maximum without max() function            |
+
+**Time:** O(n*m) | **Space:** O(1)
 
 ## Template — copy for every new problem
 
