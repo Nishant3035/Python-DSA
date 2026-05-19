@@ -28,7 +28,10 @@
 | 383 | Ransom Note             | Easy       | Hash — Dictionary      | No    | May 17 |
 | 387 | First Unique Character  | Easy       | Hash — Dictionary      | Yes   | May 17 |
 | 2114| Maximum Words in Sentences| Easy     | Array — String Split   | Yes   | May 18 |
-**Total solved: 19 | Easy: 19 | Medium: 0 | Hard: 0**
+| 1431| Kids With Greatest Candies| Easy     | Array — Max tracking   | No    | May 19 |
+| 167  | Two Sum II - Sorted Array| Medium   | Two Pointer            | Yes   | May 19 |
+
+**Total solved: 21 | Easy: 20 | Medium: 1 | Hard: 0**
 
 ---
 
@@ -703,6 +706,8 @@ def firstUniqChar(s):
 
 **Time:** O(n) | **Space:** O(n)
 
+---
+
 ## LC 2114 – Maximum Number of Words Found in Sentences
 **Date:** May 18, 2026
 **Difficulty:** Easy
@@ -735,6 +740,90 @@ def mostWordsFound(sentences):
 | `if sen > max_sen`    | Track running maximum without max() function            |
 
 **Time:** O(n*m) | **Space:** O(1)
+
+---
+
+## LC 1431 – Kids With the Greatest Number of Candies
+**Date:** May 19, 2026
+**Difficulty:** Easy
+**Pattern:** Array — Max Tracking
+**Hint needed:** No
+
+**Approach:**
+Find maximum candy count in array first.
+Then for each kid check if their candies + extra >= maximum.
+Append True or False to result list accordingly.
+
+**Solution:**
+```python
+def kidsWithCandies(candies, extraCandies):
+    result = []
+    highest_candy = 0
+    for i in candies:
+        if i > highest_candy:
+            highest_candy = i
+    for candy in candies:
+        if candy + extraCandies >= highest_candy:
+            result.append(True)
+        else:
+            result.append(False)
+    return result
+```
+
+**Syntax & Inbuilt Features Learned:**
+| Syntax / Feature       | What it means                                           |
+|------------------------|---------------------------------------------------------|
+| `for i in candies`     | i IS the value directly — not the index                 |
+| `result.append(True)`  | Append boolean directly to list                         |
+| `>= highest_candy`     | Greater OR equal — kid can also match the highest       |
+| Two loop pattern       | First find max, then use max in second loop             |
+| Alternative            | `max(candies)` gives highest in one line                |
+
+**Time:** O(n) | **Space:** O(n)
+
+---
+
+## LC 167 – Two Sum II Input Array Is Sorted
+**Date:** May 19, 2026
+**Difficulty:** Medium ⭐ First Medium Solved!
+**Pattern:** Two Pointer
+**Hint needed:** Yes — while loop structure
+
+**Approach:**
+Array is sorted — use two pointers left and right.
+If sum == target — return both indexes (1-indexed).
+If sum > target — move right pointer left (reduce sum).
+If sum < target — move left pointer right (increase sum).
+
+**Solution:**
+```python
+def twoSum(numbers, target):
+    n = len(numbers)
+    left = 0
+    right = n - 1
+    while left < right:
+        if numbers[left] + numbers[right] == target:
+            return left + 1, right + 1
+        if numbers[left] + numbers[right] > target:
+            right -= 1
+        else:
+            left += 1
+```
+
+**Syntax & Inbuilt Features Learned:**
+| Syntax / Feature           | What it means                                           |
+|----------------------------|---------------------------------------------------------|
+| `while left < right`       | Loop until pointers meet — O(n) not O(n²)              |
+| `right -= 1`               | Move right pointer left — reduces sum                   |
+| `left += 1`                | Move left pointer right — increases sum                 |
+| `left + 1, right + 1`      | Problem uses 1-indexed — add 1 to both                 |
+| Why sorted array matters   | Can predict if sum is too big or too small              |
+| Two pointer vs nested loop | O(n) vs O(n²) — always prefer two pointer on sorted    |
+
+**Time:** O(n) | **Space:** O(1)
+
+---
+
 
 ## Template — copy for every new problem
 
