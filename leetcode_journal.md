@@ -30,8 +30,10 @@
 | 2114| Maximum Words in Sentences| Easy     | Array — String Split   | Yes   | May 18 |
 | 1431| Kids With Greatest Candies| Easy     | Array — Max tracking   | No    | May 19 |
 | 167  | Two Sum II - Sorted Array| Medium   | Two Pointer            | Yes   | May 19 |
+| 1470 | Shuffle the Array      | Easy       | Array — Interleaving   | Yes   | May 20 |
+| 704  | Binary Search          | Easy       | Binary Search          | No    | May 20 |
 
-**Total solved: 21 | Easy: 20 | Medium: 1 | Hard: 0**
+**Total solved: 23 | Easy: 22 | Medium: 1 | Hard: 0**
 
 ---
 
@@ -824,6 +826,77 @@ def twoSum(numbers, target):
 
 ---
 
+## LC 1470 – Shuffle the Array
+**Date:** May 20, 2026
+**Difficulty:** Easy
+**Pattern:** Array — Interleaving
+**Hint needed:** Yes — approach hint
+
+**Approach:**
+Loop n times. Each iteration append nums[i] (first half)
+then nums[i+n] (second half). Returns interleaved result.
+
+**Solution:**
+```python
+def shuffle(nums, n):
+    result = []
+    for i in range(n):
+        result.append(nums[i])
+        result.append(nums[i + n])
+    return result
+```
+
+**Syntax & Inbuilt Features Learned:**
+| Syntax / Feature     | What it means                                           |
+|----------------------|---------------------------------------------------------|
+| `range(n)`           | Loop exactly n times — 0 to n-1                        |
+| `nums[i + n]`        | Access second half element — offset by n               |
+| Interleaving pattern | Take one from first half, one from second half          |
+| `result.append(x)`   | Add element to end of list                             |
+
+**Time:** O(n) | **Space:** O(n)
+
+---
+
+## LC 704 – Binary Search
+**Date:** May 20, 2026
+**Difficulty:** Easy
+**Pattern:** Binary Search
+**Hint needed:** No
+
+**Approach:**
+Classic binary search. Set low and high pointers.
+Find mid. If target == nums[mid] return mid.
+If target < mid go left (high = mid-1).
+If target > mid go right (low = mid+1).
+Return -1 if not found.
+
+**Solution:**
+```python
+def search(nums, target):
+    low, high = 0, len(nums) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if target == nums[mid]:
+            return mid
+        elif target < nums[mid]:
+            high = mid - 1
+        else:
+            low = mid + 1
+    return -1
+```
+
+**Syntax & Inbuilt Features Learned:**
+| Syntax / Feature       | What it means                                           |
+|------------------------|---------------------------------------------------------|
+| `low, high = 0, n-1`   | Multiple assignment in one line                        |
+| `(low + high) // 2`    | Floor division — gives integer mid index               |
+| `while low <= high`    | Keep searching while valid range exists                 |
+| `high = mid - 1`       | Discard right half — target is smaller                 |
+| `low = mid + 1`        | Discard left half — target is larger                   |
+| `return -1`            | Outside loop — target not found                        |
+
+**Time:** O(log n) | **Space:** O(1)
 
 ## Template — copy for every new problem
 
