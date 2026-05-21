@@ -32,8 +32,10 @@
 | 167  | Two Sum II - Sorted Array| Medium   | Two Pointer            | Yes   | May 19 |
 | 1470 | Shuffle the Array      | Easy       | Array — Interleaving   | Yes   | May 20 |
 | 704  | Binary Search          | Easy       | Binary Search          | No    | May 20 |
+| 1768 | Merge Strings Alternately | Easy    | String — Two Pointer   | Yes   | May 21 |
+| 153  | Find Min in Rotated Array | Medium  | Binary Search          | Yes   | May 21 |
 
-**Total solved: 23 | Easy: 22 | Medium: 1 | Hard: 0**
+***Total solved: 25 | Easy: 23 | Medium: 2 | Hard: 0**
 
 ---
 
@@ -897,6 +899,94 @@ def search(nums, target):
 | `return -1`            | Outside loop — target not found                        |
 
 **Time:** O(log n) | **Space:** O(1)
+
+---
+
+## LC 1768 – Merge Strings Alternately
+**Date:** May 21, 2026
+**Difficulty:** Easy
+**Pattern:** String — Interleaving
+**Hint needed:** Yes — loop structure
+
+**Approach:**
+Loop using index up to max length of both strings.
+If index valid for word1 — add word1[i].
+If index valid for word2 — add word2[i].
+Handles unequal lengths automatically.
+
+**Solution:**
+```python
+def mergeAlternately(word1, word2):
+    merged = ""
+    for i in range(max(len(word1), len(word2))):
+        if i < len(word1):
+            merged += word1[i]
+        if i < len(word2):
+            merged += word2[i]
+    return merged
+```
+
+**Syntax & Inbuilt Features Learned:**
+| Syntax / Feature            | What it means                                           |
+|-----------------------------|---------------------------------------------------------|
+| `max(len(word1), len(word2))`| Loop up to longer string's length                     |
+| `if i < len(word1)`         | Guard — don't access index beyond string length        |
+| `merged += word1[i]`        | String concatenation using +=                          |
+| `range` vs `for x in str`  | Use range when you need index to access multiple lists  |
+| Common mistake              | `word1[i]` when i is already char — use range instead  |
+
+**Time:** O(n) | **Space:** O(n)
+
+---
+
+## LC 153 – Find Minimum in Rotated Sorted Array
+**Date:** May 21, 2026
+**Difficulty:** Medium
+**Pattern:** Binary Search — Rotated Array
+**Hint needed:** Yes — full help
+**⚠️ REVISE THIS IN 3 DAYS**
+
+**Approach:**
+Binary Search on rotated array. Compare mid with right.
+If nums[mid] > nums[right] — minimum is in RIGHT half
+(left side is sorted, min must be after mid).
+Else — minimum is in LEFT half including mid.
+When left == right — found the minimum.
+
+**Solution:**
+```python
+def findMin(nums):
+    left = 0
+    right = len(nums) - 1
+    while left < right:
+        middle = (left + right) // 2
+        if nums[middle] > nums[right]:
+            left = middle + 1
+        else:
+            right = middle
+    return nums[left]
+```
+
+**Syntax & Inbuilt Features Learned:**
+| Syntax / Feature          | What it means                                           |
+|---------------------------|---------------------------------------------------------|
+| `nums[middle] > nums[right]`| Key comparison — tells which half is unsorted        |
+| `left = middle + 1`       | Min is in right half — discard left including mid      |
+| `right = middle`          | Min could be mid itself — don't discard it             |
+| `while left < right`      | Stop when pointers meet — that's the answer            |
+| `return nums[left]`       | left == right at this point — both point to minimum    |
+| Why compare with right?   | Right side tells us if rotation happened in left half  |
+
+**Key insight:**
+If mid > right — the left half is sorted normally,
+rotation happened in right half, minimum is there.
+If mid <= right — right half is sorted, minimum is in left half.
+
+**Time:** O(log n) | **Space:** O(1)
+
+---
+
+
 
 ## Template — copy for every new problem
 
