@@ -29,13 +29,14 @@
 | 387 | First Unique Character  | Easy       | Hash — Dictionary      | Yes   | May 17 |
 | 2114| Maximum Words in Sentences| Easy     | Array — String Split   | Yes   | May 18 |
 | 1431| Kids With Greatest Candies| Easy     | Array — Max tracking   | No    | May 19 |
-| 167  | Two Sum II - Sorted Array| Medium   | Two Pointer            | Yes   | May 19 |
-| 1470 | Shuffle the Array      | Easy       | Array — Interleaving   | Yes   | May 20 |
-| 704  | Binary Search          | Easy       | Binary Search          | No    | May 20 |
-| 1768 | Merge Strings Alternately | Easy    | String — Two Pointer   | Yes   | May 21 |
-| 153  | Find Min in Rotated Array | Medium  | Binary Search          | Yes   | May 21 |
-
-***Total solved: 25 | Easy: 23 | Medium: 2 | Hard: 0**
+| 167 | Two Sum II - Sorted Array| Medium    | Two Pointer            | Yes   | May 19 |
+| 1470| Shuffle the Array       | Easy       | Array — Interleaving   | Yes   | May 20 |
+| 704 | Binary Search           | Easy       | Binary Search          | No    | May 20 |
+| 1768| Merge Strings Alternately | Easy     | String — Two Pointer   | Yes   | May 21 |
+| 153 | Find Min in Rotated Array | Medium   | Binary Search          | Yes   | May 21 |
+| 1672| Richest Customer Wealth | Easy       | Array                  | Yes   | May 22 |
+  
+***Total solved: 26 | Easy: 24 | Medium: 2 | Hard: 0**
 
 ---
 
@@ -986,6 +987,45 @@ If mid <= right — right half is sorted, minimum is in left half.
 
 ---
 
+## LC 1672 – Richest Customer Wealth
+**Date:** 22 May 2026
+**Difficulty:** Easy
+**Pattern:** Array Counter
+**Hint needed:** Yes
+
+**Approach:**
+Loop through every customer (row) in the 2D array.
+Find the sum of each customer's bank accounts using `sum()`.
+Keep track of the maximum wealth found.
+
+**Solution:**
+```python
+class Solution:
+    def maximumWealth(self, accounts: List[List[int]]) -> int:
+
+        maximum = 0
+
+        for customer in accounts:
+
+            wealth = sum(customer)
+
+            maximum = max(maximum, wealth)
+
+        return maximum
+```
+
+**Syntax & Inbuilt Features Learned:**
+
+| Syntax / Feature           | What it means                  |
+|----------------------------|--------------------------------|
+| `sum(customer)`            | Adds all elements in a list    |
+| `max(a,b)`                 | Returns larger value           |
+| `for customer in accounts` | Traverses each row in 2D array |
+| `List[List[int]]`          | 2D integer array               |
+
+**Time:** O(n * m) | **Space:** O(1)
+
+---
 
 
 ## Template — copy for every new problem
