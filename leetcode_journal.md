@@ -35,8 +35,9 @@
 | 1768| Merge Strings Alternately | Easy     | String — Two Pointer   | Yes   | May 21 |
 | 153 | Find Min in Rotated Array | Medium   | Binary Search          | Yes   | May 21 |
 | 1672| Richest Customer Wealth | Easy       | Array                  | Yes   | May 22 |
-  
-***Total solved: 26 | Easy: 24 | Medium: 2 | Hard: 0**
+| 2235| Add Two Integers        | Easy       | Math                   | No    | May 23 |
+
+***Total solved: 27 | Easy: 25 | Medium: 2 | Hard: 0**
 
 ---
 
@@ -1026,6 +1027,33 @@ class Solution:
 **Time:** O(n * m) | **Space:** O(1)
 
 ---
+
+## LC 2235 – Add Two Integers
+**Date:** May 23, 2026
+**Difficulty:** Easy
+**Pattern:** Math
+**Hint needed:** No
+
+**Approach:**
+Simply return the sum of both integers.
+One line solution.
+
+**Solution:**
+```python
+def sum(num1, num2):
+    return num1 + num2
+```
+
+**Syntax & Inbuilt Features Learned:**
+| Syntax / Feature  | What it means                                      |
+|-------------------|----------------------------------------------------|
+| `return a + b`    | Direct return without storing in variable          |
+| One liner         | Simple problems don't need complex solutions       |
+
+**Time:** O(1) | **Space:** O(1)
+
+---
+
 
 
 ## Template — copy for every new problem
