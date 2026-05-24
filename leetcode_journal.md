@@ -36,8 +36,9 @@
 | 153 | Find Min in Rotated Array | Medium   | Binary Search          | Yes   | May 21 |
 | 1672| Richest Customer Wealth | Easy       | Array                  | Yes   | May 22 |
 | 2235| Add Two Integers        | Easy       | Math                   | No    | May 23 |
+| 2011| Final Value After Operations | Easy  | Array — String Check   | No    | May 24 |
 
-***Total solved: 27 | Easy: 25 | Medium: 2 | Hard: 0**
+***Total solved: 28 | Easy: 26 | Medium: 2 | Hard: 0**
 
 ---
 
@@ -1054,7 +1055,51 @@ def sum(num1, num2):
 
 ---
 
+## LC 2011 – Final Value of Variable After Performing Operations
+**Date:** May 24, 2026
+**Difficulty:** Easy
+**Pattern:** Array — String Check
+**Hint needed:** No
 
+**Approach:**
+Loop through operations. Check each string.
+If contains "--" subtract 1. If contains "++" add 1.
+Return final value of x.
+
+**Solution:**
+```python
+def finalValueAfterOperations(operations):
+    x = 0
+    for operation in operations:
+        if operation == "--X":
+            x -= 1
+        elif operation == "X--":
+            x -= 1
+        elif operation == "X++":
+            x += 1
+        else:
+            x += 1
+    return x
+```
+
+**Syntax & Inbuilt Features Learned:**
+| Syntax / Feature      | What it means                                      |
+|-----------------------|----------------------------------------------------|
+| `x -= 1`              | Decrement x by 1                                   |
+| `x += 1`              | Increment x by 1                                   |
+| String comparison     | `==` checks exact string match                     |
+| Smarter alternative   | Check `"+"` in operation — covers both X++ and ++X |
+
+**Smarter solution:**
+```python
+def finalValueAfterOperations(operations):
+    x = 0
+    for op in operations:
+        x += 1 if "+" in op else -1
+    return x
+```
+
+**Time:** O(n) | **Space:** O(1)
 
 ## Template — copy for every new problem
 
