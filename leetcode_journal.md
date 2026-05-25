@@ -37,8 +37,9 @@
 | 1672| Richest Customer Wealth | Easy       | Array                  | Yes   | May 22 |
 | 2235| Add Two Integers        | Easy       | Math                   | No    | May 23 |
 | 2011| Final Value After Operations | Easy  | Array — String Check   | No    | May 24 |
+| 2469| Convert the Temperature | Easy       | Math                   | No    | May 25 |
 
-***Total solved: 28 | Easy: 26 | Medium: 2 | Hard: 0**
+***Total solved: 29 | Easy: 27 | Medium: 2 | Hard: 0**
 
 ---
 
@@ -1100,6 +1101,35 @@ def finalValueAfterOperations(operations):
 ```
 
 **Time:** O(n) | **Space:** O(1)
+
+## LC 2469 – Convert the Temperature
+**Date:** May 25, 2026
+**Difficulty:** Easy
+**Pattern:** Math
+**Hint needed:** No
+
+**Approach:**
+Apply temperature conversion formulas directly.
+Kelvin = celsius + 273.15
+Fahrenheit = celsius * 1.80 + 32.00
+Return both in a list.
+
+**Solution:**
+```python
+def convertTemperature(celsius):
+    kelvin = celsius + 273.15
+    fahrenheit = (celsius * 1.80) + 32.00
+    return [kelvin, fahrenheit]
+```
+
+**Syntax & Inbuilt Features Learned:**
+| Syntax / Feature     | What it means                                      |
+|----------------------|----------------------------------------------------|
+| `float`              | Decimal number type — used for precise calculations|
+| `return [a, b]`      | Return multiple values as a list                   |
+| Direct formula       | Some problems just need math — no loops needed     |
+
+**Time:** O(1) | **Space:** O(1)
 
 ## Template — copy for every new problem
 
