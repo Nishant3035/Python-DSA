@@ -38,8 +38,10 @@
 | 2235| Add Two Integers        | Easy       | Math                   | No    | May 23 |
 | 2011| Final Value After Operations | Easy  | Array — String Check   | No    | May 24 |
 | 2469| Convert the Temperature | Easy       | Math                   | No    | May 25 |
+| 125 | Valid Palindrome        | Easy       | String — Two Pointer   | Yes   | May 26 |
 
-***Total solved: 29 | Easy: 27 | Medium: 2 | Hard: 0**
+
+**Total solved: 30 | Easy: 28 | Medium: 2 | Hard: 0**
 
 ---
 
@@ -1102,6 +1104,8 @@ def finalValueAfterOperations(operations):
 
 **Time:** O(n) | **Space:** O(1)
 
+---
+
 ## LC 2469 – Convert the Temperature
 **Date:** May 25, 2026
 **Difficulty:** Easy
@@ -1130,6 +1134,70 @@ def convertTemperature(celsius):
 | Direct formula       | Some problems just need math — no loops needed     |
 
 **Time:** O(1) | **Space:** O(1)
+
+---
+
+## LC 125 – Valid Palindrome
+**Date:** 26 May 2026
+**Difficulty:** Easy
+**Pattern:** String — Two Pointer
+**Hint needed:** Yes
+
+**Approach:**
+Create a cleaned lowercase string containing only alphanumeric characters.
+Use two pointers:
+- one from start
+- one from end
+
+Compare both characters:
+- if mismatch → return False
+- otherwise move inward
+
+If all characters match, return True.
+
+**Solution:**
+```python
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+
+        clean = ""
+
+        for ch in s:
+
+            if ch.isalnum():
+                clean += ch.lower()
+
+        left = 0
+        right = len(clean) - 1
+
+        while left < right:
+
+            if clean[left] != clean[right]:
+                return False
+
+            left += 1
+            right -= 1
+
+        return True
+```
+
+**Syntax & Inbuilt Features Learned:**
+
+| Syntax / Feature | What it means                             |
+|------------------|-------------------------------------------|
+| `isalnum()`      | Checks if character is alphabet or number |
+| `lower()`        | Converts character to lowercase           |
+| `clean += ch`    | Appends character to string               |
+| `left < right`   | Two pointer traversal condition           |
+| `len(clean)-1`   | Last index of string                      |
+
+**Time:** O(n) | **Space:** O(n)
+
+---
+
+
+
+---
 
 ## Template — copy for every new problem
 
