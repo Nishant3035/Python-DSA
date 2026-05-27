@@ -39,9 +39,9 @@
 | 2011| Final Value After Operations | Easy  | Array — String Check   | No    | May 24 |
 | 2469| Convert the Temperature | Easy       | Math                   | No    | May 25 |
 | 125 | Valid Palindrome        | Easy       | String — Two Pointer   | Yes   | May 26 |
+| 27  | Remove Element          | Easy       | Array — Two Pointer    | No    | May 27 |
 
-
-**Total solved: 30 | Easy: 28 | Medium: 2 | Hard: 0**
+**Total solved: 31 | Easy: 29 | Medium: 2 | Hard: 0**
 
 ---
 
@@ -1195,7 +1195,60 @@ class Solution:
 
 ---
 
+## LC 27 – Remove Element
+**Date:** 26 May 2026  
+**Difficulty:** Easy  
+**Pattern:** Array — Two Pointer  
+**Hint needed:** No
+ 
 
+## Approach
+
+Use two pointers:
+- `right` traverses the array
+- `left` stores valid elements
+
+If current element is not equal to `val`:
+- place it at `left`
+- move `left` ahead
+
+Finally return `left` as the new length.
+
+
+## Solution
+
+```python
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+
+        left = 0
+
+        for right in range(len(nums)):
+
+            if nums[right] != val:
+
+                nums[left] = nums[right]
+                left += 1
+
+        return left
+```
+
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature           | Meaning                                           |
+|----------------------------|---------------------------------------------------|
+| `range(len(nums))`         | Traverses array indices                           |
+| `nums[left] = nums[right]` | Replaces value in-place                           |
+| `!=`                       | Checks inequality                                 |
+| `left += 1`                | Moves pointer forward                             |
+| Two Pointer                | One pointer traverses, another stores valid values|
+
+
+## Complexity
+
+**Time:** O(n)  
+**Space:** O(1)
 
 ---
 
