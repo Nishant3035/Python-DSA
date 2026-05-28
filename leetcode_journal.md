@@ -40,8 +40,9 @@
 | 2469| Convert the Temperature | Easy       | Math                   | No    | May 25 |
 | 125 | Valid Palindrome        | Easy       | String — Two Pointer   | Yes   | May 26 |
 | 27  | Remove Element          | Easy       | Array — Two Pointer    | No    | May 27 |
-
-**Total solved: 31 | Easy: 29 | Medium: 2 | Hard: 0**
+| 1929| Concatenation of Array  | Easy       | Array                  | No    | May 28 |
+ 
+**Total solved: 32 | Easy: 30 | Medium: 2 | Hard: 0**
 
 ---
 
@@ -1249,6 +1250,51 @@ class Solution:
 
 **Time:** O(n)  
 **Space:** O(1)
+
+---
+
+## LC 1929 – Concatenation of Array
+**Date:** 26 May 2026  
+**Difficulty:** Easy  
+**Pattern:** Array  
+**Hint needed:** No  
+
+
+## Approach
+
+Return the array concatenated with itself.
+
+Use the `+` operator to join:
+- original array
+- original array again
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def getConcatenation(self, nums: List[int]) -> List[int]:
+
+        return nums + nums
+```
+
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `nums + nums` | Concatenates two lists |
+| `return` | Returns final list |
+| `List[int]` | Integer array type hint |
+
+---
+
+## Complexity
+
+**Time:** O(n)  
+**Space:** O(n)
 
 ---
 
