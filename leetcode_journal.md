@@ -41,8 +41,9 @@
 | 125 | Valid Palindrome        | Easy       | String — Two Pointer   | Yes   | May 26 |
 | 27  | Remove Element          | Easy       | Array — Two Pointer    | No    | May 27 |
 | 1929| Concatenation of Array  | Easy       | Array                  | No    | May 28 |
- 
-**Total solved: 32 | Easy: 30 | Medium: 2 | Hard: 0**
+| 1108| Defanging an IP Address | Easy       | String Manipulation    | No    | May 29 |
+
+**Total solved: 33 | Easy: 31 | Medium: 2 | Hard: 0**
 
 ---
 
@@ -1294,6 +1295,46 @@ class Solution:
 ## Complexity
 
 **Time:** O(n)  
+**Space:** O(n)
+
+---
+
+## LC 1108 – Defanging an IP Address
+**Date:** 29 May 2026
+**Difficulty:** Easy
+**Pattern:** String Manipulation
+**Hint needed:** No
+
+---
+
+## Approach
+
+Replace every "." with "[.]".
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def defangIPaddr(self, address: str) -> str:
+        return address.replace(".", "[.]")
+```
+
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `replace(old, new)` | Replaces all occurrences of old string with new string |
+| `return` | Returns final string |
+
+---
+
+## Complexity
+
+**Time:** O(n)
 **Space:** O(n)
 
 ---
