@@ -42,8 +42,9 @@
 | 27  | Remove Element          | Easy       | Array — Two Pointer    | No    | May 27 |
 | 1929| Concatenation of Array  | Easy       | Array                  | No    | May 28 |
 | 1108| Defanging an IP Address | Easy       | String Manipulation    | No    | May 29 |
+| 70  | Climbing Stairs         | Easy       | DP — Fibonacci         | Yes   | May 30 |
 
-**Total solved: 33 | Easy: 31 | Medium: 2 | Hard: 0**
+**Total solved: 34 | Easy: 32 | Medium: 2 | Hard: 0**
 
 ---
 
@@ -1338,6 +1339,77 @@ class Solution:
 **Space:** O(n)
 
 ---
+
+## LC 70 – Climbing Stairs
+**Date:** 30 May 2026  
+**Difficulty:** Easy  
+**Pattern:** Dynamic Programming — Fibonacci  
+**Hint needed:** Yes  
+
+---
+
+## Approach
+
+To reach stair `n`:
+
+- From stair `n-1`, take 1 step
+- From stair `n-2`, take 2 steps
+
+Therefore:
+
+Ways to reach stair `n` = Ways to reach stair `n-1` + Ways to reach stair `n-2`
+
+This follows the Fibonacci pattern.
+
+Instead of recursion, store only the previous two values and build the answer iteratively.
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def climbStairs(self, n: int) -> int:
+
+        if n == 1:
+            return 1
+
+        if n == 2:
+            return 2
+
+        prev_prev = 1
+        prev = 2
+
+        for i in range(3, n + 1):
+
+            current = prev + prev_prev
+
+            prev_prev = prev
+
+            prev = current
+
+        return current
+```
+
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `range(3, n + 1)` | Loops from stair 3 to stair n |
+| `current = prev + prev_prev` | Fibonacci recurrence relation |
+| `prev_prev = prev` | Shift previous values forward |
+| `prev = current` | Update latest computed value |
+| Dynamic Programming | Build solution from previously computed answers |
+
+---
+
+## Complexity
+
+**Time:** O(n)  
+**Space:** O(1)
+
 
 ## Template — copy for every new problem
 
