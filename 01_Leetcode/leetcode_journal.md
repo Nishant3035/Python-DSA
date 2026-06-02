@@ -46,9 +46,10 @@
 | 1342| Number of Steps to Reduce a Number to Zero| Easy|Math — Simulation|No | May 31 |
 | 509 | Fibonacci Number        | Easy       | DP — Fibonacci         | Yes   | June 1 |
 | 231 | Power of Two            | Easy       | Recursion - Math       | No    | June 2 |
-| 50  | Pow(x, n)            | Medium | Recursion—Binary Exponentiation | Yes | May 30 |
+| 50  | Pow(x, n)            | Medium | Recursion—Binary Exponentiation | Yes | June 2 |
+| 326 | Power of Three          | Easy       | Math — Repeated Division | No | June 2 |
 
-**Total solved: 38 | Easy: 35 | Medium: 3 | Hard: 0**
+**Total solved: 39 | Easy: 36 | Medium: 3 | Hard: 0**
 ``` 🚀
 
 ---
@@ -1664,6 +1665,61 @@ class Solution:
 
 **Time:** O(log n)  
 **Space:** O(log n)
+
+## LC 326 – Power of Three
+**Date:** 30 May 2026  
+**Difficulty:** Easy  
+**Pattern:** Math — Repeated Division  
+**Hint needed:** Yes  
+
+---
+
+## Approach
+
+A number is a power of 3 if it can be repeatedly divided by 3 and eventually becomes 1.
+
+- If `n <= 0`, return `False`
+- While `n` is divisible by 3:
+  - divide it by 3
+- After the loop:
+  - if `n == 1` → power of 3
+  - otherwise → not a power of 3
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def isPowerOfThree(self, n: int) -> bool:
+
+        if n <= 0:
+            return False
+
+        while n % 3 == 0:
+            n = n // 3
+
+        return n == 1
+```
+
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `n % 3 == 0` | Checks divisibility by 3 |
+| `n // 3` | Integer division |
+| `while` | Repeats until condition fails |
+| `return n == 1` | Returns True if n became 1 |
+| Repeated Division | Common pattern for power-check problems |
+
+---
+
+## Complexity
+
+**Time:** O(log₃ n)  
+**Space:** O(1)
 
 ## Template — copy for every new problem
 
