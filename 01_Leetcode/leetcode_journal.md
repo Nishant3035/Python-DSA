@@ -43,8 +43,11 @@
 | 1929| Concatenation of Array  | Easy       | Array                  | No    | May 28 |
 | 1108| Defanging an IP Address | Easy       | String Manipulation    | No    | May 29 |
 | 70  | Climbing Stairs         | Easy       | DP — Fibonacci         | Yes   | May 30 |
+| 1342| Number of Steps to Reduce a Number to Zero | Easy|Math — Simulation|No| May 31 |
+| 509 | Fibonacci Number        | Easy       | DP — Fibonacci         | Yes   | June 1 |
 
-**Total solved: 34 | Easy: 32 | Medium: 2 | Hard: 0**
+**Total solved: 36 | Easy: 34 | Medium: 2 | Hard: 0**
+``` 🚀
 
 ---
 
@@ -1346,7 +1349,6 @@ class Solution:
 **Pattern:** Dynamic Programming — Fibonacci  
 **Hint needed:** Yes  
 
----
 
 ## Approach
 
@@ -1409,6 +1411,133 @@ class Solution:
 
 **Time:** O(n)  
 **Space:** O(1)
+
+---
+
+## LC 1342 – Number of Steps to Reduce a Number to Zero
+**Date:** 30 May 2026
+**Difficulty:** Easy
+**Pattern:** Math — Simulation
+**Hint needed:** No
+
+---
+
+## Approach
+
+Keep reducing the number until it becomes 0.
+
+- If number is even, divide by 2.
+- If number is odd, subtract 1.
+
+Count each operation.
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def numberOfSteps(self, num: int) -> int:
+
+        steps = 0
+
+        while num > 0:
+
+            if num % 2 == 0:
+                num = num // 2
+
+            else:
+                num -= 1
+
+            steps += 1
+
+        return steps
+```
+
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `num % 2 == 0` | Checks if number is even |
+| `num // 2` | Integer division |
+| `num -= 1` | Subtracts 1 from number |
+| `while num > 0` | Runs until number becomes 0 |
+
+---
+
+## Complexity
+
+**Time:** O(log n)
+**Space:** O(1)
+
+---
+
+## LC 509 – Fibonacci Number
+**Date:** 30 May 2026
+**Difficulty:** Easy
+**Pattern:** Dynamic Programming — Fibonacci
+**Hint needed:** Yes
+
+---
+
+## Approach
+
+Use the Fibonacci recurrence relation:
+
+F(n) = F(n-1) + F(n-2)
+
+Store only the previous two Fibonacci numbers and build the answer iteratively.
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def fib(self, n: int) -> int:
+
+        if n == 0:
+            return 0
+
+        if n == 1:
+            return 1
+
+        prev_prev = 0
+        prev = 1
+
+        for i in range(2, n + 1):
+
+            current = prev + prev_prev
+
+            prev_prev = prev
+            prev = current
+
+        return current
+```
+
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `range(2, n + 1)` | Loops from 2 to n |
+| `current = prev + prev_prev` | Fibonacci recurrence |
+| `prev_prev = prev` | Shifts previous value |
+| `prev = current` | Updates latest Fibonacci number |
+| Dynamic Programming | Uses previous results to compute next result |
+
+---
+
+## Complexity
+
+**Time:** O(n)
+**Space:** O(1)
+
+---
+
 
 
 ## Template — copy for every new problem
