@@ -46,8 +46,9 @@
 | 1342| Number of Steps to Reduce a Number to Zero| Easy|Math — Simulation|No | May 31 |
 | 509 | Fibonacci Number        | Easy       | DP — Fibonacci         | Yes   | June 1 |
 | 231 | Power of Two            | Easy       | Recursion - Math       | No    | June 2 |
+| 50  | Pow(x, n)            | Medium | Recursion—Binary Exponentiation | Yes | May 30 |
 
-**Total solved: 37 | Easy: 35 | Medium: 2 | Hard: 0**
+**Total solved: 38 | Easy: 35 | Medium: 3 | Hard: 0**
 ``` 🚀
 
 ---
@@ -1587,6 +1588,82 @@ class Solution:
 **Time:** O(1)
 **Space:** O(1)
 
+
+## LC 50 – Pow(x, n)
+**Date:** 30 May 2026  
+**Difficulty:** Medium  
+**Pattern:** Recursion — Binary Exponentiation  
+**Hint needed:** Yes  
+
+---
+
+## Approach
+
+Use Divide & Conquer.
+
+Instead of multiplying `x` by itself `n` times:
+
+- Compute `x^(n//2)` once
+- Store it in `half`
+- Reuse the result
+
+For even powers:
+
+xⁿ = (xⁿᐟ²)²
+
+For odd powers:
+
+xⁿ = x × (xⁿᐟ²)²
+
+For negative powers:
+
+x⁻ⁿ = 1 / xⁿ
+
+This reduces the problem size by half at every recursive call.
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+
+        if n == 0:
+            return 1
+
+        if n < 0:
+            return 1 / self.myPow(x, -n)
+
+        half = self.myPow(x, n // 2)
+
+        if n % 2 == 0:
+            return half * half
+
+        else:
+            return x * half * half
+```
+
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `n // 2` | Integer division by 2 |
+| `self.myPow()` | Recursive function call |
+| `n % 2 == 0` | Checks if exponent is even |
+| `1 / self.myPow(x, -n)` | Handles negative powers |
+| `half = ...` | Stores recursive result to avoid recomputation |
+| Binary Exponentiation | Reduces exponent by half every step |
+| Divide & Conquer | Solves smaller subproblems recursively |
+
+---
+
+## Complexity
+
+**Time:** O(log n)  
+**Space:** O(log n)
 
 ## Template — copy for every new problem
 
