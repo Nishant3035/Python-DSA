@@ -43,10 +43,11 @@
 | 1929| Concatenation of Array  | Easy       | Array                  | No    | May 28 |
 | 1108| Defanging an IP Address | Easy       | String Manipulation    | No    | May 29 |
 | 70  | Climbing Stairs         | Easy       | DP — Fibonacci         | Yes   | May 30 |
-| 1342| Number of Steps to Reduce a Number to Zero | Easy|Math — Simulation|No| May 31 |
+| 1342| Number of Steps to Reduce a Number to Zero| Easy|Math — Simulation|No | May 31 |
 | 509 | Fibonacci Number        | Easy       | DP — Fibonacci         | Yes   | June 1 |
+| 231 | Power of Two            | Easy       | Recursion - Math       | No    | June 2 |
 
-**Total solved: 36 | Easy: 34 | Medium: 2 | Hard: 0**
+**Total solved: 37 | Easy: 35 | Medium: 2 | Hard: 0**
 ``` 🚀
 
 ---
@@ -1538,6 +1539,53 @@ class Solution:
 
 ---
 
+## LC 231 - Power of Two
+**Date:** 2 June 2026
+**Difficulty:** Easy
+**Pattern:** Recursion/Math
+**Hint needed:** No 
+
+---
+
+## Approach
+
+**Use the loop** : You used a loop checking pow(2, x) for x in 0–30. Correct but longer. The bit trick is the cleaner way.
+
+**Key Insight** — Powers of 2 in binary always have exactly one 1 bit. So n & (n-1) clears that bit → result is 0. Non-powers won't give 0.
+
+## Solution
+
+```python
+class Solution:
+    def isPowerOfTwo(self, n: int) -> bool:
+        for x in range(0,31):
+            if n == pow(2,x):
+                return True
+        return False
+```
+`**Without Loop Solution**`
+```python
+    def isPowerOfTwo(self, n: int) -> bool:
+        if n <= 0:
+            return False
+        return n & (n - 1) == 0
+```
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `pow(2, x)` | Built-in power function |
+| `n & (n-1) == 0` | Bit trick — clears lowest set bit, 0 means power of 2 |
+| `n <= 0` | Edge case check — powers of 2 are always positive |
+
+---
+
+## Complexity
+
+**Time:** O(1)
+**Space:** O(1)
 
 
 ## Template — copy for every new problem
