@@ -47,9 +47,12 @@
 | 509 | Fibonacci Number        | Easy       | DP — Fibonacci         | Yes   | June 1 |
 | 231 | Power of Two            | Easy       | Recursion - Math       | No    | June 2 |
 | 50  | Pow(x, n)            | Medium | Recursion—Binary Exponentiation | Yes | June 2 |
-| 326 | Power of Three          | Easy       | Math — Repeated Division | No | June 2 |
+| 326 | Power of Three          | Easy       | Math — Repeated Division |  No | June 2 |
+| 338 | Counting Bits           | Easy   | Bit Manipulation—Brute Force | Yes | June 3 |
+| 342 | Power of Four           | Easy       |Math — Repeated Division  | No  | June 3 |
+| 75  | Sort Colors         | Medium |Three Pointer — Dutch National Flag| No | June 3 |
 
-**Total solved: 39 | Easy: 36 | Medium: 3 | Hard: 0**
+**Total solved: 42 | Easy: 38 | Medium: 4 | Hard: 0**
 ``` 🚀
 
 ---
@@ -1719,6 +1722,195 @@ class Solution:
 ## Complexity
 
 **Time:** O(log₃ n)  
+**Space:** O(1)
+
+## LC 338 – Counting Bits
+**Date:** 30 May 2026
+**Difficulty:** Easy
+**Pattern:** Bit Manipulation — Brute Force
+**Hint needed:** Yes
+
+---
+
+## Approach
+
+For every number from `0` to `n`:
+
+- Convert number to binary using `bin()`
+- Count the number of `'1'` characters
+- Store the count in the result array
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def countBits(self, n: int) -> List[int]:
+
+        result = []
+
+        for i in range(n + 1):
+            result.append(bin(i).count('1'))
+
+        return result
+```
+
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `bin(i)` | Converts integer to binary string |
+| `.count('1')` | Counts occurrences of character '1' |
+| `range(n + 1)` | Loops from 0 to n inclusive |
+| `result.append()` | Adds element to list |
+| Bit Representation | Binary form of a number |
+
+---
+
+## Complexity
+
+**Time:** O(n log n)
+**Space:** O(n)
+
+## LC 342 – Power of Four
+**Date:** 30 May 2026
+**Difficulty:** Easy
+**Pattern:** Math — Repeated Division
+**Hint needed:** Yes
+
+---
+
+## Approach
+
+A number is a power of 4 if it can be repeatedly divided by 4 and eventually becomes 1.
+
+- If `n <= 0`, return False
+- While divisible by 4:
+  - divide by 4
+- If final value is 1:
+  - return True
+- Otherwise:
+  - return False
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def isPowerOfFour(self, n: int) -> bool:
+
+        if n <= 0:
+            return False
+
+        while n % 4 == 0:
+            n = n // 4
+
+        return n == 1
+```
+
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `n % 4 == 0` | Checks divisibility by 4 |
+| `n // 4` | Integer division |
+| `while` | Repeats while condition is true |
+| `return n == 1` | Returns boolean result |
+| Repeated Division | Common pattern for power-check problems |
+
+---
+
+## Complexity
+
+**Time:** O(log₄ n)
+**Space:** O(1)
+
+## LC 75 – Sort Colors
+**Date:** 30 May 2026  
+**Difficulty:** Medium  
+**Pattern:** Three Pointer — Dutch National Flag
+**Hint needed:** Yes  
+
+---
+
+## Approach
+
+Maintain three pointers:
+
+- `low` → position for next 0
+- `mid` → current element being processed
+- `high` → position for next 2
+
+Rules:
+
+- If `nums[mid] == 0`
+  - swap with `low`
+  - increment `low` and `mid`
+
+- If `nums[mid] == 1`
+  - increment `mid`
+
+- If `nums[mid] == 2`
+  - swap with `high`
+  - decrement `high`
+
+Continue until `mid > high`.
+
+This sorts the array in one pass.
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+
+        low, mid, high = 0, 0, len(nums) - 1
+
+        while mid <= high:
+
+            if nums[mid] == 0:
+
+                nums[low], nums[mid] = nums[mid], nums[low]
+
+                low += 1
+                mid += 1
+
+            elif nums[mid] == 1:
+
+                mid += 1
+
+            else:
+
+                nums[mid], nums[high] = nums[high], nums[mid]
+
+                high -= 1
+```
+
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `low, mid, high = ...` | Multiple variable assignment |
+| `nums[a], nums[b] = nums[b], nums[a]` | Python swap |
+| `while mid <= high` | Process until all elements are classified |
+| Three Pointers | Track 0s, current element, and 2s |
+| Dutch National Flag | One-pass partitioning algorithm |
+
+---
+
+## Complexity
+
+**Time:** O(n)  
 **Space:** O(1)
 
 ## Template — copy for every new problem
