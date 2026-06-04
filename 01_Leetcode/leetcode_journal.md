@@ -51,8 +51,11 @@
 | 338 | Counting Bits           | Easy   | Bit Manipulation—Brute Force | Yes | June 3 |
 | 342 | Power of Four           | Easy       |Math — Repeated Division  | No  | June 3 |
 | 75  | Sort Colors         | Medium |Three Pointer — Dutch National Flag| No | June 3 |
+| 912 | Sort an Array           | Medium     |Divide&Conquer — Merge Sort| Yes | Jun 4 |
+| 88  | Merge Sorted Array      | Easy       |Two Pointer — Reverse Merge| Yes | Jun 4 |
+| 56  | Merge Intervals         | Medium    |Sorting + Greedy + Intervals| Yes | Jun 4 |
 
-**Total solved: 42 | Easy: 38 | Medium: 4 | Hard: 0**
+**Total solved: 45 | Easy: 39 | Medium: 6 | Hard: 0**
 ``` 🚀
 
 ---
@@ -1421,7 +1424,7 @@ class Solution:
 ---
 
 ## LC 1342 – Number of Steps to Reduce a Number to Zero
-**Date:** 30 May 2026
+**Date:** 31 May 2026
 **Difficulty:** Easy
 **Pattern:** Math — Simulation
 **Hint needed:** No
@@ -1481,7 +1484,7 @@ class Solution:
 ---
 
 ## LC 509 – Fibonacci Number
-**Date:** 30 May 2026
+**Date:** 1 June 2026
 **Difficulty:** Easy
 **Pattern:** Dynamic Programming — Fibonacci
 **Hint needed:** Yes
@@ -1594,7 +1597,7 @@ class Solution:
 
 
 ## LC 50 – Pow(x, n)
-**Date:** 30 May 2026  
+**Date:** 2 june 2026  
 **Difficulty:** Medium  
 **Pattern:** Recursion — Binary Exponentiation  
 **Hint needed:** Yes  
@@ -1670,7 +1673,7 @@ class Solution:
 **Space:** O(log n)
 
 ## LC 326 – Power of Three
-**Date:** 30 May 2026  
+**Date:** 2 June 2026  
 **Difficulty:** Easy  
 **Pattern:** Math — Repeated Division  
 **Hint needed:** Yes  
@@ -1725,7 +1728,7 @@ class Solution:
 **Space:** O(1)
 
 ## LC 338 – Counting Bits
-**Date:** 30 May 2026
+**Date:** June 3 2026
 **Difficulty:** Easy
 **Pattern:** Bit Manipulation — Brute Force
 **Hint needed:** Yes
@@ -1776,7 +1779,7 @@ class Solution:
 **Space:** O(n)
 
 ## LC 342 – Power of Four
-**Date:** 30 May 2026
+**Date:** June 3 2026
 **Difficulty:** Easy
 **Pattern:** Math — Repeated Division
 **Hint needed:** Yes
@@ -1832,7 +1835,7 @@ class Solution:
 **Space:** O(1)
 
 ## LC 75 – Sort Colors
-**Date:** 30 May 2026  
+**Date:** June 3 2026  
 **Difficulty:** Medium  
 **Pattern:** Three Pointer — Dutch National Flag
 **Hint needed:** Yes  
@@ -1912,6 +1915,240 @@ class Solution:
 
 **Time:** O(n)  
 **Space:** O(1)
+
+
+## LC 912 – Sort an Array
+**Date:** June 4 2026  
+**Difficulty:** Medium  
+**Pattern:** Divide & Conquer — Merge Sort
+**Hint needed:** Yes  
+
+---
+
+## Approach
+
+Use Merge Sort.
+
+1. Divide the array into two halves.
+2. Recursively sort the left half.
+3. Recursively sort the right half.
+4. Merge the two sorted halves.
+
+The merge step compares elements from both halves and builds a sorted array.
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+
+        if len(nums) <= 1:
+            return nums
+
+        mid = len(nums) // 2
+
+        left = self.sortArray(nums[:mid])
+        right = self.sortArray(nums[mid:])
+
+        return self.merge_arr(left, right)
+
+    def merge_arr(self, left, right):
+
+        i, j = 0, 0
+        result = []
+
+        while i < len(left) and j < len(right):
+
+            if left[i] <= right[j]:
+                result.append(left[i])
+                i += 1
+
+            else:
+                result.append(right[j])
+                j += 1
+
+        result.extend(left[i:])
+        result.extend(right[j:])
+
+        return result
+```
+
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `nums[:mid]` | Left half of array |
+| `nums[mid:]` | Right half of array |
+| `self.sortArray()` | Recursive function call |
+| `self.merge_arr()` | Calls helper method inside class |
+| `result.extend(arr)` | Adds all remaining elements of a list |
+| Divide & Conquer | Break problem into smaller subproblems |
+| Merge Sort | Recursively sort and merge arrays |
+
+---
+
+## Complexity
+
+**Time:** O(n log n)  
+**Space:** O(n)
+
+
+## LC 88 – Merge Sorted Array
+**Date:** 4 Jun 2026
+**Difficulty:** Easy
+**Pattern:** Two Pointer — Reverse Merge
+**Hint needed:** Yes
+
+---
+
+## Approach
+
+Since `nums1` already has extra space at the end, start merging from the back.
+
+Maintain three pointers:
+
+- `i` → last valid element in `nums1`
+- `j` → last element in `nums2`
+- `k` → last position in `nums1`
+
+Compare `nums1[i]` and `nums2[j]`.
+
+Place the larger element at `nums1[k]` and move pointers accordingly.
+
+After the main loop, copy any remaining elements from `nums2`.
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+
+        i = m - 1
+        j = n - 1
+        k = m + n - 1
+
+        while i >= 0 and j >= 0:
+
+            if nums1[i] > nums2[j]:
+
+                nums1[k] = nums1[i]
+                i -= 1
+
+            else:
+
+                nums1[k] = nums2[j]
+                j -= 1
+
+            k -= 1
+
+        while j >= 0:
+
+            nums1[k] = nums2[j]
+            j -= 1
+            k -= 1
+```
+
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `m - 1` | Last valid index of nums1 |
+| `n - 1` | Last index of nums2 |
+| `m + n - 1` | Last position of merged array |
+| `while i >= 0 and j >= 0` | Compare elements from both arrays |
+| `nums1[k] = ...` | Place larger element at correct position |
+| Two Pointer | Track positions in both arrays |
+| Reverse Merge | Merge from end to avoid overwriting values |
+
+---
+
+## Complexity
+
+**Time:** O(m + n)  
+**Space:** O(1)
+
+## LC 56 – Merge Intervals
+**Date:** 4 Jun 2026
+**Difficulty:** Medium
+**Pattern:** Sorting + Greedy + Intervals
+**Hint needed:** Yes
+
+---
+
+## Approach
+
+First sort the intervals based on their starting values.
+
+Maintain a result array:
+
+- Add the first interval.
+- Compare each interval with the last interval in the result.
+- If they overlap:
+  - Merge them by updating the ending value.
+- Otherwise:
+  - Add the current interval to the result.
+
+Two intervals overlap when:
+
+```python
+last[1] >= current[0]
+```
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+
+        intervals.sort()
+
+        result = [intervals[0]]
+
+        for i in range(1, len(intervals)):
+
+            current = intervals[i]
+            last = result[-1]
+
+            if last[1] >= current[0]:
+
+                last[1] = max(last[1], current[1])
+
+            else:
+
+                result.append(current)
+
+        return result
+```
+
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `intervals.sort()` | Sort intervals by starting value |
+| `result[-1]` | Access last interval in result |
+| `max(a, b)` | Returns larger value |
+| `result.append()` | Add interval to result |
+| Greedy | Make locally optimal merge decisions |
+| Interval Overlap | Check if intervals intersect |
+
+---
+
+## Complexity
+
+**Time:** O(n log n)  
+**Space:** O(n)
 
 ## Template — copy for every new problem
 
