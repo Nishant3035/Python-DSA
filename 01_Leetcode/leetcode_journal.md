@@ -54,8 +54,9 @@
 | 912 | Sort an Array           | Medium     |Divide&Conquer — Merge Sort| Yes | Jun 4 |
 | 88  | Merge Sorted Array      | Easy       |Two Pointer — Reverse Merge| Yes | Jun 4 |
 | 56  | Merge Intervals         | Medium    |Sorting + Greedy + Intervals| Yes | Jun 4 |
-
-**Total solved: 45 | Easy: 39 | Medium: 6 | Hard: 0**
+| 2236| Root Equals Sum of Children | Easy   | Binary Tree — Basic Check | No  | Jun 5 |
+  
+**Total solved: 46 | Easy: 40 | Medium: 6 | Hard: 0**
 ``` 🚀
 
 ---
@@ -2149,6 +2150,51 @@ class Solution:
 
 **Time:** O(n log n)  
 **Space:** O(n)
+
+
+## LC 2236 – Root Equals Sum of Children
+**Date:** 5 Jun 2026
+**Difficulty:** Easy
+**Pattern:** Binary Tree — Basic Traversal
+**Hint needed:** No
+
+---
+
+## Approach
+
+Check whether the value of the root node is equal to the sum of its left and right child.
+
+Return the comparison result directly.
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def checkTree(self, root: Optional[TreeNode]) -> bool:
+
+        return root.val == root.left.val + root.right.val
+```
+
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `root.val` | Access current node value |
+| `root.left.val` | Access left child value |
+| `root.right.val` | Access right child value |
+| `==` | Equality comparison |
+| Binary Tree Node Access | Read values from tree nodes |
+
+---
+
+## Complexity
+
+**Time:** O(1)  
+**Space:** O(1)
 
 ## Template — copy for every new problem
 
