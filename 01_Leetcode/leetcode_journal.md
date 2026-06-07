@@ -55,8 +55,9 @@
 | 88  | Merge Sorted Array      | Easy       |Two Pointer — Reverse Merge| Yes | Jun 4 |
 | 56  | Merge Intervals         | Medium    |Sorting + Greedy + Intervals| Yes | Jun 4 |
 | 2236| Root Equals Sum of Children | Easy   | Binary Tree — Basic Check | No  | Jun 5 |
-  
-**Total solved: 46 | Easy: 40 | Medium: 6 | Hard: 0**
+| 80  | Remove Duplicates from Sorted Array II | Medium | Two Pointer    | No  | Jun 7 |
+
+**Total solved: 46 | Easy: 39 | Medium: 7 | Hard: 0**
 ``` 🚀
 
 ---
@@ -2194,6 +2195,75 @@ class Solution:
 ## Complexity
 
 **Time:** O(1)  
+**Space:** O(1)
+
+
+## LC 80 – Remove Duplicates from Sorted Array II
+**Date:** 7 Jun 2026
+**Difficulty:** Medium
+**Pattern:** Two Pointer
+**Hint needed:** Yes
+
+---
+
+## Approach
+
+Since the array is sorted, duplicates appear together.
+
+Allow at most 2 occurrences of each number.
+
+- The first two elements are always valid.
+- Use:
+  - `left` → position to write next valid element
+  - `right` → current element being checked
+- If current element is different from `nums[left - 2]`,
+  it means we have not already stored two copies.
+- Copy it to `nums[left]` and move `left`.
+
+Return `left` as the new length.
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+
+        if len(nums) <= 2:
+            return len(nums)
+
+        left = 2
+
+        for right in range(2, len(nums)):
+
+            if nums[right] != nums[left - 2]:
+
+                nums[left] = nums[right]
+                left += 1
+
+        return left
+```
+
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `left = 2` | First two elements are always valid |
+| `for right in range(...)` | Read pointer |
+| `nums[left - 2]` | Check if two copies already exist |
+| `nums[left] = nums[right]` | Store valid element |
+| `left += 1` | Move write pointer |
+| Two Pointer | Separate read and write positions |
+| In-place Modification | Modify array without extra space |
+
+---
+
+## Complexity
+
+**Time:** O(n)  
 **Space:** O(1)
 
 ## Template — copy for every new problem
