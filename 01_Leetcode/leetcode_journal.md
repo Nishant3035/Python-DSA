@@ -56,8 +56,9 @@
 | 56  | Merge Intervals         | Medium    |Sorting + Greedy + Intervals| Yes | Jun 4 |
 | 2236| Root Equals Sum of Children | Easy   | Binary Tree — Basic Check | No  | Jun 5 |
 | 80  | Remove Duplicates from Sorted Array II | Medium | Two Pointer    | No  | Jun 7 |
+| 189 | Rotate Array            | Medium     | Array — Rotation         | Yes  | Jun 8 |
 
-**Total solved: 46 | Easy: 39 | Medium: 7 | Hard: 0**
+**Total solved: 47 | Easy: 39 | Medium: 8 | Hard: 0**
 ``` 🚀
 
 ---
@@ -2265,6 +2266,66 @@ class Solution:
 
 **Time:** O(n)  
 **Space:** O(1)
+
+
+## LC 189 – Rotate Array
+**Date:** 8 Jun 2026
+**Difficulty:** Medium
+**Pattern:** Array — Rotation
+**Hint needed:** Yes
+
+---
+
+## Approach
+
+Rotate the array to the right by `k` positions.
+
+First reduce unnecessary rotations:
+
+```python
+k %= len(nums)
+```
+
+Then:
+
+- Take the last `k` elements
+- Place them at the front
+- Append the remaining elements
+
+Modify the original array in-place using slicing.
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+
+        k %= len(nums)
+
+        nums[:] = nums[-k:] + nums[:-k]
+```
+
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `k %= len(nums)` | Reduce extra rotations |
+| `nums[-k:]` | Last k elements |
+| `nums[:-k]` | Elements before last k |
+| `+` | Concatenate lists |
+| `nums[:] = ...` | Modify original list in-place |
+| Array Rotation | Move elements cyclically |
+
+---
+
+## Complexity
+
+**Time:** O(n)  
+**Space:** O(n)
 
 ## Template — copy for every new problem
 
