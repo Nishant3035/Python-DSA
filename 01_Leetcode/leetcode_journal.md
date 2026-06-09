@@ -2327,6 +2327,9 @@ class Solution:
 **Time:** O(n)  
 **Space:** O(n)
 
+
+First Occurence 
+
 ## Template — copy for every new problem
 
 ````
