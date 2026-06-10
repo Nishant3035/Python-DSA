@@ -57,8 +57,9 @@
 | 2236| Root Equals Sum of Children | Easy   | Binary Tree — Basic Check | No  | Jun 5 |
 | 80  | Remove Duplicates from Sorted Array II | Medium | Two Pointer    | No  | Jun 7 |
 | 189 | Rotate Array            | Medium     | Array — Rotation         | Yes  | Jun 8 |
+| 905 | Sort Array By Parity    | Easy  | Two Pointers — Partition Array | No | Jun 10 |
 
-**Total solved: 47 | Easy: 39 | Medium: 8 | Hard: 0**
+**Total solved: 48 | Easy: 40 | Medium: 8 | Hard: 0**
 ``` 🚀
 
 ---
@@ -2329,6 +2330,85 @@ class Solution:
 
 
 First Occurence 
+
+## LC 905 – Sort Array By Parity
+**Date:** 10 Jun 2026
+**Difficulty:** Easy
+**Pattern:** Two Pointers — Partition Array
+**Hint needed:** No
+
+---
+
+## Approach
+
+Move all even numbers to the beginning of the array and all odd numbers to the end.
+
+Use two pointers:
+
+- `left` starts from the beginning.
+- `right` starts from the end.
+
+If the left side contains an odd number and the right side contains an even number, swap them.
+
+Then:
+
+- Move `left` forward if it points to an even number.
+- Move `right` backward if it points to an odd number.
+
+Continue until both pointers meet.
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def sortArrayByParity(self, nums: List[int]) -> List[int]:
+        left = 0
+        right = len(nums) - 1
+
+        while left < right:
+            if nums[left] % 2 > nums[right] % 2:
+                nums[left], nums[right] = nums[right], nums[left]
+
+            if nums[left] % 2 == 0:
+                left += 1
+
+            if nums[right] % 2 == 1:
+                right -= 1
+
+        return nums
+```
+
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `num % 2 == 0` | Check if number is even |
+| `num % 2 == 1` | Check if number is odd |
+| `nums[i], nums[j] = nums[j], nums[i]` | Swap two elements |
+| Two Pointers | Process array from both ends |
+| In-place Swapping | Rearrange without extra space |
+
+---
+
+## Complexity
+
+**Time:** O(n)
+
+**Space:** O(1)
+
+---
+
+## Key Learning
+
+- Two pointers can partition an array efficiently.
+- Swapping is only required when elements are on the wrong side.
+- This pattern is useful for segregation and partitioning problems.
+
+| 905 | Sort Array By Parity | Easy | Two Pointers — Partition Array | No | Jun 10 |
 
 ## Template — copy for every new problem
 
