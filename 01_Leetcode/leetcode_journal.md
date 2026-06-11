@@ -60,7 +60,7 @@
 | 905 | Sort Array By Parity    | Easy  | Two Pointers — Partition Array | No | Jun 10 |
 | 121 | Best Time to Buy and Sell Stock | Easy | Sliding Window / Greedy | No | Jun 11 |
 
-**Total solved: 48 | Easy: 40 | Medium: 8 | Hard: 0**
+**Total solved: 49 | Easy: 41| Medium: 8 | Hard: 0**
 ``` 🚀
 
 ---
