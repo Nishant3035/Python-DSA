@@ -58,6 +58,7 @@
 | 80  | Remove Duplicates from Sorted Array II | Medium | Two Pointer    | No  | Jun 7 |
 | 189 | Rotate Array            | Medium     | Array — Rotation         | Yes  | Jun 8 |
 | 905 | Sort Array By Parity    | Easy  | Two Pointers — Partition Array | No | Jun 10 |
+| 121 | Best Time to Buy and Sell Stock | Easy | Sliding Window / Greedy | No | Jun 11 |
 
 **Total solved: 48 | Easy: 40 | Medium: 8 | Hard: 0**
 ``` 🚀
@@ -2408,7 +2409,96 @@ class Solution:
 - Swapping is only required when elements are on the wrong side.
 - This pattern is useful for segregation and partitioning problems.
 
-| 905 | Sort Array By Parity | Easy | Two Pointers — Partition Array | No | Jun 10 |
+## LC 121 – Best Time to Buy and Sell Stock
+**Date:** 11 Jun 2026
+**Difficulty:** Easy
+**Pattern:** Sliding Window / Two Pointers / Greedy
+**Hint needed:** No
+
+---
+
+## Approach
+
+Use two pointers:
+
+- `left` → buying day
+- `right` → selling day
+
+If the selling price is greater than the buying price:
+
+- Calculate profit
+- Update maximum profit
+
+If a cheaper price is found:
+
+- Move `left` to that position
+- This gives a better buying opportunity
+
+Continue until all days are processed.
+
+---
+
+## Solution
+
+```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+
+        left = 0
+        right = 1
+
+        max_profit = 0
+
+        while right < len(prices):
+
+            if prices[right] > prices[left]:
+
+                profit = prices[right] - prices[left]
+
+                max_profit = max(max_profit, profit)
+
+            else:
+
+                left = right
+
+            right += 1
+
+        return max_profit
+```
+
+---
+
+## Syntax & Inbuilt Features Learned
+
+| Syntax / Feature | Meaning |
+|------------------|----------|
+| `left = 0` | Buy day pointer |
+| `right = 1` | Sell day pointer |
+| `prices[right] > prices[left]` | Check if profit is possible |
+| `profit = prices[right] - prices[left]` | Calculate profit |
+| `max(max_profit, profit)` | Keep highest profit seen so far |
+| `left = right` | Update buy day when cheaper price found |
+| Two Pointers | Track buy and sell positions |
+| Greedy | Always keep the best buying price |
+
+---
+
+## Complexity
+
+**Time:** O(n)
+
+**Space:** O(1)
+
+---
+
+## Key Learning
+
+- Buy before selling.
+- A lower price is always a better buying opportunity.
+- Two pointers can efficiently track the best buy/sell pair.
+- This problem introduces the Sliding Window / Greedy pattern.
+
+
 
 ## Template — copy for every new problem
 
