@@ -166,4 +166,4 @@ print(hash_map)
 ## Connect
 - GitHub: [github.com/Nishant3035](https://github.com/Nishant3035)
 - LinkedIn: [Nishant Chaurasia](https://linkedin.com/in/chaurasianishant)
-- LeetCode Journal: [progress/leetcode_journal.md](./progress/leetcode_journal.md)
+- LeetCode Journal: [progress/leetcode_journal.md](./progress/leetcode_journal.md)d
