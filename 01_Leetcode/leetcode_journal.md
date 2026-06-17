@@ -371,7 +371,7 @@ Build two frequency dicts — one per string using dict.get().
 Early exit if lengths differ. Compare both dicts at end.
 
 **Solution:**
-..
+...
 ```python
 def isAnagram(s, t):
     if len(s) != len(t):
