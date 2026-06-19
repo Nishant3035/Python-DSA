@@ -59,8 +59,9 @@
 | 189 | Rotate Array            | Medium     | Array — Rotation         | Yes  | Jun 8 |
 | 905 | Sort Array By Parity    | Easy  | Two Pointers — Partition Array | No | Jun 10 |
 | 121 | Best Time to Buy and Sell Stock | Easy | Sliding Window / Greedy | No | Jun 11 |
+| 152 | Maximum Product Subarray|Medium|DynamicProgramming/KadaneVariant| Yes | Jun 19 |
 
-**Total solved: 49 | Easy: 41| Medium: 8 | Hard: 0**
+**Total solved: 50 | Easy: 41 | Medium: 9 | Hard: 0**
 ``` 🚀
 
 ---
@@ -2498,6 +2499,61 @@ class Solution:
 - Two pointers can efficiently track the best buy/sell pair.
 - This problem introduces the Sliding Window / Greedy pattern.
 
+
+## LC 152 – Maximum Product Subarray
+
+**Date:** June 19, 2026
+**Difficulty:** Medium
+**Pattern:** Dynamic Programming — Kadane Variant
+**Hint needed:** Yes
+
+**Approach:**
+Maintain two variables:
+
+* `cur_max` = maximum product ending at current index
+* `cur_min` = minimum product ending at current index
+
+A negative number can turn the minimum product into the maximum product and vice versa, so whenever the current number is negative, swap `cur_max` and `cur_min`.
+
+Update both values at each step and keep track of the global maximum product.
+
+**Solution:**
+
+```python
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        cur_max = nums[0]
+        cur_min = nums[0]
+        ans = nums[0]
+
+        for i in range(1, len(nums)):
+            if nums[i] < 0:
+                cur_max, cur_min = cur_min, cur_max
+
+            cur_max = max(nums[i], cur_max * nums[i])
+            cur_min = min(nums[i], cur_min * nums[i])
+
+            ans = max(ans, cur_max)
+
+        return ans
+```
+
+**Syntax & Inbuilt Features Learned:**
+
+| Syntax / Feature                      | What it means                                          |
+| ------------------------------------- | ------------------------------------------------------ |
+| `float("-inf")`                       | Represents negative infinity                           |
+| `max(a, b)`                           | Returns the larger value                               |
+| `min(a, b)`                           | Returns the smaller value                              |
+| `cur_max, cur_min = cur_min, cur_max` | Python tuple unpacking used to swap variables          |
+| `nums[i] < 0`                         | Check if current number is negative                    |
+| `max(nums[i], cur_max * nums[i])`     | Either start a new subarray or extend the existing one |
+| `min(nums[i], cur_min * nums[i])`     | Track smallest product for future sign flips           |
+
+**Time:** O(n) | **Space:** O(1)
+
+**Key Learning:**
+For product subarray problems, tracking only the maximum product is not enough. A negative number can convert the minimum product into the maximum product, so both must be maintained.
 
 
 ## Template — copy for every new problem
