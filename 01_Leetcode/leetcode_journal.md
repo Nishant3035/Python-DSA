@@ -60,8 +60,10 @@
 | 905 | Sort Array By Parity    | Easy  | Two Pointers — Partition Array | No | Jun 10 |
 | 121 | Best Time to Buy and Sell Stock | Easy | Sliding Window / Greedy | No | Jun 11 |
 | 152 | Maximum Product Subarray|Medium|DynamicProgramming/KadaneVariant| Yes | Jun 19 |
+| 2149| Rearrange Array Elements by Sign | Medium | Two Pointers / Array |Yes | Jun 20 |
+| 128 | Longest Consecutive Sequence  |  Medium  |   Hash Set / Sorting  | No | Jun 20 |
 
-**Total solved: 50 | Easy: 41 | Medium: 9 | Hard: 0**
+**Total solved: 52 | Easy: 41 | Medium: 11 | Hard: 0**
 ``` 🚀
 
 ---
@@ -2554,6 +2556,183 @@ class Solution:
 
 **Key Learning:**
 For product subarray problems, tracking only the maximum product is not enough. A negative number can convert the minimum product into the maximum product, so both must be maintained.
+
+## LC 2149 – Rearrange Array Elements by Sign
+
+**Date:** Jun 20, 2026
+**Difficulty:** Medium
+**Pattern:** Two Pointers / Array Traversal
+**Hint needed:** No
+
+### Approach
+
+Create a result array of the same size.
+
+Maintain two pointers:
+
+* `p_idx = 0` → next position for a positive number
+* `n_idx = 1` → next position for a negative number
+
+Traverse the input array:
+
+* Place positive numbers at even indices.
+* Place negative numbers at odd indices.
+* Move the corresponding pointer by 2 after each placement.
+
+Since the problem guarantees an equal number of positive and negative integers, both pointers stay within bounds.
+
+**Solution:**
+
+```python id="7w0kqf"
+class Solution:
+    def rearrangeArray(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+
+        result = [0] * n
+
+        p_idx = 0
+        n_idx = 1
+
+        for i in range(n):
+            if nums[i] >= 0:
+                result[p_idx] = nums[i]
+                p_idx += 2
+            else:
+                result[n_idx] = nums[i]
+                n_idx += 2
+
+        return result
+```
+
+**Syntax & Inbuilt Features Learned:**
+
+| Syntax / Feature    | What it means                                |
+| ------------------- | -------------------------------------------- |
+| `[0] * n`           | Creates a list of size `n` filled with zeros |
+| `p_idx += 2`        | Move to next even index                      |
+| `n_idx += 2`        | Move to next odd index                       |
+| `nums[i] >= 0`      | Checks whether current number is positive    |
+| `for i in range(n)` | Traverse entire array                        |
+| `return result`     | Returns the rearranged array                 |
+
+**Time:** O(n)
+**Space:** O(n)
+
+### Key Learning
+
+Instead of swapping elements repeatedly, create a new array and directly place positive numbers at even indices and negative numbers at odd indices. Using separate pointers for positive and negative positions makes the implementation simple and efficient.
+
+## LC 128 – Longest Consecutive Sequence
+
+**Date:** Jun 20, 2026
+**Difficulty:** Medium
+**Pattern:** Hash Set / Sorting
+**Hint needed:** Yes
+
+### Approach 1: Sorting (My Approach)
+
+Sort the array first. Then traverse it and count the length of consecutive sequences.
+
+* If `nums[i+1] == nums[i]`, skip duplicates.
+* If `nums[i+1] == nums[i] + 1`, increment streak.
+* Otherwise, reset streak to 1.
+* Track the maximum streak length.
+
+**Solution:**
+
+```python
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        n = len(nums)
+
+        if n == 0:
+            return 0
+
+        nums.sort()
+
+        count = 1
+        max_count = 1
+
+        for i in range(n - 1):
+            if nums[i + 1] == nums[i]:
+                continue
+
+            elif nums[i + 1] == nums[i] + 1:
+                count += 1
+
+            else:
+                count = 1
+
+            max_count = max(max_count, count)
+
+        return max_count
+```
+
+**Time:** O(n log n)
+**Space:** O(1)
+
+---
+
+### Approach 2: Optimal Hash Set
+
+Store all numbers in a set.
+
+A number is the start of a sequence if:
+
+```python
+num - 1 not in nums_set
+```
+
+Only start counting from sequence beginnings. Extend the sequence while `current + 1` exists in the set.
+
+**Solution:**
+
+```python
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        nums_set = set(nums)
+        longest = 0
+
+        for num in nums_set:
+
+            if num - 1 not in nums_set:
+
+                current = num
+                streak = 1
+
+                while current + 1 in nums_set:
+                    current += 1
+                    streak += 1
+
+                longest = max(longest, streak)
+
+        return longest
+```
+
+**Time:** O(n)
+**Space:** O(n)
+
+---
+
+### Syntax & Inbuilt Features Learned
+
+| Syntax / Feature                | What it means                                       |
+| ------------------------------- | --------------------------------------------------- |
+| `nums.sort()`                   | Sorts list in ascending order                       |
+| `set(nums)`                     | Creates a hash set from a list                      |
+| `x in nums_set`                 | O(1) average lookup in a set                        |
+| `continue`                      | Skip current iteration and move to next             |
+| `max(a, b)`                     | Returns larger value                                |
+| `num - 1 not in nums_set`       | Checks if current number is the start of a sequence |
+| `while current + 1 in nums_set` | Extends the consecutive sequence                    |
+
+### Key Learning
+
+My sorting approach was correct but took O(n log n) because of sorting.
+
+The optimal solution avoids sorting completely by using a hash set. Instead of arranging numbers, it directly checks whether neighboring numbers exist. The trick is to start counting only from numbers that have no predecessor (`num - 1` not present), which guarantees O(n) time complexity.
+
+
 
 
 ## Template — copy for every new problem
