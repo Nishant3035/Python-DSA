@@ -62,7 +62,7 @@
 | 152 | Maximum Product Subarray|Medium|DynamicProgramming/KadaneVariant| Yes | Jun 19 |
 | 2149| Rearrange Array Elements by Sign | Medium | Two Pointers / Array |Yes | Jun 20 |
 | 128 | Longest Consecutive Sequence  |  Medium  |   Hash Set / Sorting  | No | Jun 20 |
-| 73  | Set Matrix Zeroes        |  Medium   |   Matrix  /  Hashing   |  Yes  | Jun 21 |
+| 73  | Set Matrix Zeroes       |  Medium    |   Matrix  /  Hashing   |  Yes  | Jun 21 |
 | 48  | Rotate Image            | Medium | Matrix / Transpose + Reverse | Yes | Jun 21 |
 | 54  | Spiral Matrix           | Medium | Matrix / Boundary Traversal  | Yes | Jun 21 |
 | 59  | Spiral Matrix II        | Medium | Matrix / Boundary Traversal  | Yes | Jun 21 |
