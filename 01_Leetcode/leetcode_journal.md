@@ -65,8 +65,9 @@
 | 73  | Set Matrix Zeroes        |  Medium   |   Matrix  /  Hashing   |  Yes  | Jun 21 |
 | 48  | Rotate Image            | Medium | Matrix / Transpose + Reverse | Yes | Jun 21 |
 | 54  | Spiral Matrix           | Medium | Matrix / Boundary Traversal  | Yes | Jun 21 |
+| 59  | Spiral Matrix II        | Medium | Matrix / Boundary Traversal  | Yes | Jun 21 |
 
-**Total solved: 55 | Easy: 41 | Medium: 14 | Hard: 0**
+**Total solved: 56 | Easy: 41 | Medium: 15 | Hard: 0**
 ``` 🚀
 
 ---
@@ -3010,6 +3011,112 @@ Output:
 ```python
 [1,2,3,6,9,8,7,4,5]
 ```
+
+## LC 59 – Spiral Matrix II
+
+**Date:** Jun 21, 2026
+**Difficulty:** Medium
+**Pattern:** Matrix / Boundary Traversal
+**Hint needed:** No
+
+### Approach
+
+Create an `n × n` matrix initialized with zeros.
+
+Maintain four boundaries:
+
+* `top` → first unfilled row
+* `bottom` → last unfilled row
+* `left` → first unfilled column
+* `right` → last unfilled column
+
+Fill the matrix in spiral order:
+
+1. Left → Right across the top row
+2. Top → Bottom down the right column
+3. Right → Left across the bottom row
+4. Bottom → Top up the left column
+
+After completing each side, shrink the corresponding boundary.
+
+Keep placing numbers from `1` to `n²` until the matrix is completely filled.
+
+**Solution:**
+
+```python
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        matrix = [[0] * n for _ in range(n)]
+
+        left, top = 0, 0
+        bottom, right = len(matrix) - 1, len(matrix[0]) - 1
+
+        num = 1
+
+        while top <= bottom and left <= right:
+
+            for i in range(left, right + 1):
+                matrix[top][i] = num
+                num += 1
+            top += 1
+
+            for i in range(top, bottom + 1):
+                matrix[i][right] = num
+                num += 1
+            right -= 1
+
+            if top <= bottom:
+                for i in range(right, left - 1, -1):
+                    matrix[bottom][i] = num
+                    num += 1
+                bottom -= 1
+
+            if left <= right:
+                for i in range(bottom, top - 1, -1):
+                    matrix[i][left] = num
+                    num += 1
+                left += 1
+
+        return matrix
+```
+
+### Syntax & Inbuilt Features Learned
+
+| Syntax / Feature                        | What it means                               |
+| --------------------------------------- | ------------------------------------------- |
+| `[[0] * n for _ in range(n)]`           | Creates an `n × n` matrix filled with zeros |
+| `matrix[row][col]`                      | Access element at a specific position       |
+| `range(left, right + 1)`                | Traverse left to right                      |
+| `range(right, left - 1, -1)`            | Traverse right to left                      |
+| `range(bottom, top - 1, -1)`            | Traverse bottom to top                      |
+| `while top <= bottom and left <= right` | Continue while unfilled region exists       |
+| `num += 1`                              | Move to the next value to place             |
+
+### Complexity
+
+* Time: O(n²)
+* Space: O(1) auxiliary space (excluding output matrix)
+
+### Key Learning
+
+LC 59 is the reverse of LC 54.
+
+* LC 54: Read elements in spiral order and store them.
+* LC 59: Fill elements in spiral order while maintaining the same four boundaries.
+
+The boundary traversal pattern remains exactly the same; only the operation changes from reading to writing.
+
+### Visualization
+
+For `n = 3`:
+
+```text
+1 2 3
+8 9 4
+7 6 5
+```
+
+Numbers are filled layer by layer in spiral order until the center is reached.
 
 
 ## Template — copy for every new problem
