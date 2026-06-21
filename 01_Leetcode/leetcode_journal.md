@@ -66,8 +66,9 @@
 | 48  | Rotate Image            | Medium | Matrix / Transpose + Reverse | Yes | Jun 21 |
 | 54  | Spiral Matrix           | Medium | Matrix / Boundary Traversal  | Yes | Jun 21 |
 | 59  | Spiral Matrix II        | Medium | Matrix / Boundary Traversal  | Yes | Jun 21 |
+| 74  | Search a 2D Matrix      | Medium |    Binary Search on Matrix   | Yes | Jun 21 |
 
-**Total solved: 56 | Easy: 41 | Medium: 15 | Hard: 0**
+**Total solved: 57 | Easy: 41 | Medium: 16 | Hard: 0**
 ``` 🚀
 
 ---
@@ -3117,6 +3118,95 @@ For `n = 3`:
 ```
 
 Numbers are filled layer by layer in spiral order until the center is reached.
+
+
+## LC 74 – Search a 2D Matrix
+
+**Date:** Jun 21, 2026
+**Difficulty:** Medium
+**Pattern:** Binary Search on Matrix
+**Hint needed:** Yes
+
+### Approach
+
+Treat the matrix as a virtual sorted 1D array without actually flattening it.
+
+* Total elements = `rows × cols`
+* Apply binary search on indices from `0` to `rows * cols - 1`
+* Convert the middle index into matrix coordinates:
+
+  * `row = mid // cols`
+  * `col = mid % cols`
+* Access the value using `matrix[row][col]`
+* Compare it with the target and adjust the search space.
+
+This allows binary search on the entire matrix while using only O(1) extra space.
+
+**Solution:**
+
+```python
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        rows = len(matrix)
+        cols = len(matrix[0])
+
+        low = 0
+        high = rows * cols - 1
+
+        while low <= high:
+            mid = (low + high) // 2
+
+            row = mid // cols
+            col = mid % cols
+
+            value = matrix[row][col]
+
+            if value == target:
+                return True
+
+            elif value < target:
+                low = mid + 1
+
+            else:
+                high = mid - 1
+
+        return False
+```
+
+### Syntax & Inbuilt Features Learned
+
+| Syntax / Feature    | What it means                                     |
+| ------------------- | ------------------------------------------------- |
+| `rows * cols`       | Total number of elements in matrix                |
+| `mid // cols`       | Converts 1D index to row index                    |
+| `mid % cols`        | Converts 1D index to column index                 |
+| `(low + high) // 2` | Calculates middle index                           |
+| `while low <= high` | Standard binary search condition                  |
+| `low = mid + 1`     | Search right half                                 |
+| `high = mid - 1`    | Search left half                                  |
+| `matrix[row][col]`  | Access matrix element using converted coordinates |
+
+### Complexity
+
+* Time: O(log(m × n))
+* Space: O(1)
+
+### Key Learning
+
+A sorted 2D matrix can be treated as a virtual sorted 1D array.
+
+The core trick is converting a 1D index into a 2D position:
+
+```python
+row = mid // cols
+col = mid % cols
+```
+
+This allows binary search without creating an extra array.
+
+### Mistake I Made
+
+Initially, I performed binary search on matrix values instead of indices and compared `mid` with `value`. The correct approach is to perform binary search on indices and compare the matrix element (`value`) with the target.
 
 
 ## Template — copy for every new problem
