@@ -62,8 +62,9 @@
 | 152 | Maximum Product Subarray|Medium|DynamicProgramming/KadaneVariant| Yes | Jun 19 |
 | 2149| Rearrange Array Elements by Sign | Medium | Two Pointers / Array |Yes | Jun 20 |
 | 128 | Longest Consecutive Sequence  |  Medium  |   Hash Set / Sorting  | No | Jun 20 |
+| 73  | Set Matrix Zeroes        |  Medium   |   Matrix  /  Hashing   |  Yes  | Jun 21 |
 
-**Total solved: 52 | Easy: 41 | Medium: 11 | Hard: 0**
+**Total solved: 53 | Easy: 41 | Medium: 12 | Hard: 0**
 ``` 🚀
 
 ---
@@ -2733,6 +2734,82 @@ My sorting approach was correct but took O(n log n) because of sorting.
 The optimal solution avoids sorting completely by using a hash set. Instead of arranging numbers, it directly checks whether neighboring numbers exist. The trick is to start counting only from numbers that have no predecessor (`num - 1` not present), which guarantees O(n) time complexity.
 
 
+## LC 73 – Set Matrix Zeroes
+
+**Date:** Jun 21, 2026
+**Difficulty:** Medium
+**Pattern:** Matrix / Hashing (Row & Column Marking)
+**Hint needed:** Yes (Watched video first, then practiced)
+
+### Approach
+
+Use two auxiliary arrays:
+
+* `rowtrack[i]` stores whether row `i` should become zero.
+* `coltrack[j]` stores whether column `j` should become zero.
+
+First traversal:
+
+* Find all zeroes in the matrix.
+* Mark their corresponding rows and columns.
+
+Second traversal:
+
+* If a row or column is marked, set the cell to zero.
+
+This avoids modifying the matrix while searching for original zeroes.
+
+**Solution:**
+
+```python
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        row = len(matrix)
+        col = len(matrix[0])
+
+        rowtrack = [0 for _ in range(row)]
+        coltrack = [0 for _ in range(col)]
+
+        for i in range(row):
+            for j in range(col):
+                if matrix[i][j] == 0:
+                    rowtrack[i] = -1
+                    coltrack[j] = -1
+
+        for i in range(row):
+            for j in range(col):
+                if rowtrack[i] == -1 or coltrack[j] == -1:
+                    matrix[i][j] = 0
+```
+
+### Syntax & Inbuilt Features Learned
+
+| Syntax / Feature          | What it means                                   |
+| ------------------------- | ----------------------------------------------- |
+| `len(matrix)`             | Number of rows                                  |
+| `len(matrix[0])`          | Number of columns                               |
+| `[0 for _ in range(row)]` | Creates a list of size `row` initialized with 0 |
+| `matrix[i][j]`            | Access element at row `i`, column `j`           |
+| `or`                      | True if either condition is true                |
+| Nested loops              | Traverse every cell in the matrix               |
+
+### Complexity
+
+* Time: O(m × n)
+* Space: O(m + n)
+
+### Key Learning
+
+When modifying a matrix based on existing values, avoid changing cells during the first traversal because newly created zeroes can affect future decisions. Instead, mark rows and columns first, then update the matrix in a second pass.
+
+### Optimal Follow-up
+
+The optimal solution uses the first row and first column as markers and achieves:
+
+* Time: O(m × n)
+* Space: O(1)
+
+This is the follow-up solution asked in interviews.
 
 
 ## Template — copy for every new problem
