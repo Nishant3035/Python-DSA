@@ -64,8 +64,9 @@
 | 128 | Longest Consecutive Sequence  |  Medium  |   Hash Set / Sorting  | No | Jun 20 |
 | 73  | Set Matrix Zeroes        |  Medium   |   Matrix  /  Hashing   |  Yes  | Jun 21 |
 | 48  | Rotate Image            | Medium | Matrix / Transpose + Reverse | Yes | Jun 21 |
+| 54  | Spiral Matrix           | Medium | Matrix / Boundary Traversal  | Yes | Jun 21 |
 
-**Total solved: 54 | Easy: 41 | Medium: 13 | Hard: 0**
+**Total solved: 55 | Easy: 41 | Medium: 14 | Hard: 0**
 ``` 🚀
 
 ---
@@ -2899,6 +2900,117 @@ After Reversing Rows:
 8 5 2
 9 6 3
 ```
+
+## LC 54 – Spiral Matrix
+
+**Date:** Jun 21, 2026
+**Difficulty:** Medium
+**Pattern:** Matrix / Boundary Traversal
+**Hint needed:** Yes (Watched video first, then practiced)
+
+### Approach
+
+Maintain four boundaries:
+
+* `top` → first unvisited row
+* `bottom` → last unvisited row
+* `left` → first unvisited column
+* `right` → last unvisited column
+
+Traverse the matrix layer by layer:
+
+1. Left → Right across the top row
+2. Top → Bottom down the right column
+3. Right → Left across the bottom row
+4. Bottom → Top up the left column
+
+After each traversal, shrink the corresponding boundary.
+
+Continue until all elements are visited.
+
+**Solution:**
+
+```python
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        if not matrix or not matrix[0]:
+            return []
+
+        result = []
+
+        left, top = 0, 0
+        bottom, right = len(matrix) - 1, len(matrix[0]) - 1
+
+        while top <= bottom and left <= right:
+
+            for i in range(left, right + 1):
+                result.append(matrix[top][i])
+            top += 1
+
+            for i in range(top, bottom + 1):
+                result.append(matrix[i][right])
+            right -= 1
+
+            if top <= bottom:
+                for i in range(right, left - 1, -1):
+                    result.append(matrix[bottom][i])
+                bottom -= 1
+
+            if left <= right:
+                for i in range(bottom, top - 1, -1):
+                    result.append(matrix[i][left])
+                left += 1
+
+        return result
+```
+
+### Syntax & Inbuilt Features Learned
+
+| Syntax / Feature                        | What it means                          |
+| --------------------------------------- | -------------------------------------- |
+| `if not matrix`                         | Checks if matrix is empty              |
+| `if not matrix[0]`                      | Checks if first row is empty           |
+| `result.append(x)`                      | Adds element to result list            |
+| `range(left, right + 1)`                | Traverse left to right                 |
+| `range(right, left - 1, -1)`            | Traverse right to left                 |
+| `range(bottom, top - 1, -1)`            | Traverse bottom to top                 |
+| `while top <= bottom and left <= right` | Continue while unvisited region exists |
+
+### Complexity
+
+* Time: O(m × n)
+* Space: O(1) auxiliary space (excluding output list)
+
+### Key Learning
+
+Instead of marking visited cells, maintain four boundaries and shrink them after each traversal. This allows visiting every element exactly once in spiral order.
+
+### Visualization
+
+For:
+
+```text
+1  2  3
+4  5  6
+7  8  9
+```
+
+Traversal order:
+
+```text
+1 → 2 → 3
+          ↓
+4 ← 5 ← 6
+↑         ↓
+7 → 8 → 9
+```
+
+Output:
+
+```python
+[1,2,3,6,9,8,7,4,5]
+```
+
 
 ## Template — copy for every new problem
 
