@@ -63,8 +63,9 @@
 | 2149| Rearrange Array Elements by Sign | Medium | Two Pointers / Array |Yes | Jun 20 |
 | 128 | Longest Consecutive Sequence  |  Medium  |   Hash Set / Sorting  | No | Jun 20 |
 | 73  | Set Matrix Zeroes        |  Medium   |   Matrix  /  Hashing   |  Yes  | Jun 21 |
+| 48  | Rotate Image            | Medium | Matrix / Transpose + Reverse | Yes | Jun 21 |
 
-**Total solved: 53 | Easy: 41 | Medium: 12 | Hard: 0**
+**Total solved: 54 | Easy: 41 | Medium: 13 | Hard: 0**
 ``` 🚀
 
 ---
@@ -2811,6 +2812,93 @@ The optimal solution uses the first row and first column as markers and achieves
 
 This is the follow-up solution asked in interviews.
 
+## LC 48 – Rotate Image
+
+**Date:** Jun 21, 2026
+**Difficulty:** Medium
+**Pattern:** Matrix / Transpose + Reverse
+**Hint needed:** Yes (Watched video first, then practiced)
+
+### Approach
+
+The matrix must be rotated 90° clockwise in-place.
+
+The trick is to perform two operations:
+
+1. **Transpose the matrix**
+
+   * Swap `matrix[i][j]` with `matrix[j][i]`
+   * Converts rows into columns.
+
+2. **Reverse every row**
+
+   * After transposition, reverse each row.
+   * This produces a 90° clockwise rotation.
+
+**Solution:**
+
+```python
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        n = len(matrix)
+
+        for i in range(n - 1):
+            for j in range(i + 1, n):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+
+        for i in range(n):
+            matrix[i].reverse()
+```
+
+### Syntax & Inbuilt Features Learned
+
+| Syntax / Feature                                          | What it means                                 |
+| --------------------------------------------------------- | --------------------------------------------- |
+| `matrix[i][j]`                                            | Access element at row `i`, column `j`         |
+| `matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]` | Swap two elements using tuple unpacking       |
+| `range(i + 1, n)`                                         | Traverse only upper triangular part of matrix |
+| `matrix[i].reverse()`                                     | Reverse a row in-place                        |
+| `len(matrix)`                                             | Returns matrix size (`n × n`)                 |
+
+### Complexity
+
+* Time: O(n²)
+* Space: O(1)
+
+### Key Learning
+
+A 90° clockwise matrix rotation can be achieved by:
+
+1. Transposing the matrix.
+2. Reversing each row.
+
+This avoids creating a new matrix and satisfies the in-place requirement.
+
+### Example
+
+Input:
+
+```text
+1 2 3
+4 5 6
+7 8 9
+```
+
+After Transpose:
+
+```text
+1 4 7
+2 5 8
+3 6 9
+```
+
+After Reversing Rows:
+
+```text
+7 4 1
+8 5 2
+9 6 3
+```
 
 ## Template — copy for every new problem
 
