@@ -62,13 +62,15 @@
 | 152 | Maximum Product Subarray|Medium|DynamicProgramming/KadaneVariant| Yes | Jun 19 |
 | 2149| Rearrange Array Elements by Sign | Medium | Two Pointers / Array |Yes | Jun 20 |
 | 128 | Longest Consecutive Sequence  |  Medium  |   Hash Set / Sorting  | No | Jun 20 |
-| 73  | Set Matrix Zeroes       |  Medium    |   Matrix  /  Hashing   |  Yes  | Jun 21 |
+| 73  | Set Matrix Zeroes       | Medium |      Matrix  /  Hashing      | Yes | Jun 21 |
 | 48  | Rotate Image            | Medium | Matrix / Transpose + Reverse | Yes | Jun 21 |
 | 54  | Spiral Matrix           | Medium | Matrix / Boundary Traversal  | Yes | Jun 21 |
 | 59  | Spiral Matrix II        | Medium | Matrix / Boundary Traversal  | Yes | Jun 21 |
 | 74  | Search a 2D Matrix      | Medium |    Binary Search on Matrix   | Yes | Jun 21 |
+| 1833| Maximum Ice Cream Bars  | Medium |        Greedy + Sorting      | No  | Jun 20 |
+| 15  | 3Sum                    | Medium |    Two Pointers + Sorting    | Yes | Jun 21 |
 
-**Total solved: 57 | Easy: 41 | Medium: 16 | Hard: 0**
+**Total solved: 59 | Easy: 41 | Medium: 18 | Hard: 0**
 ``` 🚀
 
 ---
@@ -3207,6 +3209,148 @@ This allows binary search without creating an extra array.
 ### Mistake I Made
 
 Initially, I performed binary search on matrix values instead of indices and compared `mid` with `value`. The correct approach is to perform binary search on indices and compare the matrix element (`value`) with the target.
+
+## LC 1833 – Maximum Ice Cream Bars
+
+**Date:** Jun 20, 2026
+**Difficulty:** Medium
+**Pattern:** Greedy + Sorting
+**Hint needed:** No (Daily LeetCode)
+
+### Approach
+
+Sort the costs array.
+
+Always buy the cheapest ice cream available first.
+
+* If current cost is affordable, buy it.
+* Reduce available coins.
+* Increase count.
+* Continue until coins are insufficient.
+
+This greedy strategy maximizes the number of ice creams purchased.
+
+**Solution:**
+
+```python
+class Solution:
+    def maxIceCream(self, costs: List[int], coins: int) -> int:
+        costs.sort()
+
+        n = len(costs)
+        count = 0
+
+        for i in range(n):
+            if costs[i] <= coins:
+                coins -= costs[i]
+                count += 1
+
+        return count
+```
+
+### Syntax & Inbuilt Features Learned
+
+| Syntax / Feature    | What it means                        |
+| ------------------- | ------------------------------------ |
+| `costs.sort()`      | Sorts costs in ascending order       |
+| `coins -= costs[i]` | Deduct purchase cost                 |
+| `count += 1`        | Increase ice cream count             |
+| Greedy strategy     | Always choose locally optimal option |
+
+### Complexity
+
+* Time: O(n log n)
+* Space: O(1)
+
+### Key Learning
+
+When the goal is to maximize the number of items purchased with a fixed budget, sorting and buying the cheapest items first is often the optimal greedy strategy.
+
+## LC 15 – 3Sum
+
+**Date:** Jun 21, 2026
+**Difficulty:** Medium
+**Pattern:** Two Pointers + Sorting
+**Hint needed:** Yes (Watched video and then implemented)
+
+### Approach
+
+Sort the array first.
+
+For every element `nums[i]`:
+
+* Fix `nums[i]` as the first number.
+* Use two pointers:
+
+  * `j = i + 1`
+  * `k = n - 1`
+* Calculate the sum of the triplet.
+* If sum < 0, move `j` right.
+* If sum > 0, move `k` left.
+* If sum == 0, store the triplet and skip duplicates.
+
+Sorting allows efficient duplicate removal and enables the two-pointer approach.
+
+**Solution:**
+
+```python
+class Solution:
+    def threeSum(self, nums: list[int]) -> list[list[int]]:
+        nums.sort()
+        n = len(nums)
+        ans = []
+
+        for i in range(n):
+            if i != 0 and nums[i] == nums[i - 1]:
+                continue
+
+            j = i + 1
+            k = n - 1
+
+            while j < k:
+                total = nums[i] + nums[j] + nums[k]
+
+                if total < 0:
+                    j += 1
+
+                elif total > 0:
+                    k -= 1
+
+                else:
+                    ans.append([nums[i], nums[j], nums[k]])
+
+                    j += 1
+                    k -= 1
+
+                    while j < k and nums[j] == nums[j - 1]:
+                        j += 1
+
+                    while j < k and nums[k] == nums[k + 1]:
+                        k -= 1
+
+        return ans
+```
+
+### Syntax & Inbuilt Features Learned
+
+| Syntax / Feature         | What it means                  |
+| ------------------------ | ------------------------------ |
+| `nums.sort()`            | Sorts array in ascending order |
+| `continue`               | Skip current iteration         |
+| `j = i + 1`              | Left pointer                   |
+| `k = n - 1`              | Right pointer                  |
+| `while j < k`            | Two pointer traversal          |
+| `ans.append([...])`      | Store valid triplet            |
+| Duplicate skipping loops | Prevent duplicate triplets     |
+
+### Complexity
+
+* Time: O(n²)
+* Space: O(1) excluding output
+
+### Key Learning
+
+For problems involving pairs/triplets and a target sum, sorting + two pointers is often more efficient than brute force. Duplicate handling is crucial in 3Sum.
 
 
 ## Template — copy for every new problem
