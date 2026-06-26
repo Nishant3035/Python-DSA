@@ -69,8 +69,9 @@
 | 74  | Search a 2D Matrix      | Medium |    Binary Search on Matrix   | Yes | Jun 21 |
 | 1833| Maximum Ice Cream Bars  | Medium |        Greedy + Sorting      | No  | Jun 20 |
 | 15  | 3Sum                    | Medium |    Two Pointers + Sorting    | Yes | Jun 21 |
+| 18  | 4Sum                    | Medium |    Two Pointers + Sorting    | No  | Jun 22 |
 
-**Total solved: 59 | Easy: 41 | Medium: 18 | Hard: 0**
+**Total solved: 60 | Easy: 41 | Medium: 19 | Hard: 0**
 ``` 🚀
 
 ---
@@ -3351,6 +3352,124 @@ class Solution:
 ### Key Learning
 
 For problems involving pairs/triplets and a target sum, sorting + two pointers is often more efficient than brute force. Duplicate handling is crucial in 3Sum.
+
+## LC 18 – 4Sum
+
+**Date:** Jun 22, 2026
+**Difficulty:** Medium
+**Pattern:** Two Pointers + Sorting
+**Hint needed:** No
+
+### Approach
+
+Sort the array first.
+
+Fix the first two numbers using nested loops:
+
+* First loop fixes `nums[i]`
+* Second loop fixes `nums[j]`
+
+Then use two pointers:
+
+* `k = j + 1`
+* `l = n - 1`
+
+Calculate the sum of the four numbers.
+
+* If sum == target, store the quadruplet and skip duplicates.
+* If sum < target, move the left pointer.
+* If sum > target, move the right pointer.
+
+Skip duplicate values for `i`, `j`, `k`, and `l` to avoid duplicate quadruplets.
+
+This is an extension of the 3Sum pattern.
+
+**Solution:**
+
+```python
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        nums.sort()
+        ans = []
+        n = len(nums)
+
+        for i in range(n):
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+
+            for j in range(i + 1, n):
+                if j > i + 1 and nums[j] == nums[j - 1]:
+                    continue
+
+                k = j + 1
+                l = n - 1
+
+                while k < l:
+                    total = nums[i] + nums[j] + nums[k] + nums[l]
+
+                    if total == target:
+                        ans.append([nums[i], nums[j], nums[k], nums[l]])
+
+                        k += 1
+                        l -= 1
+
+                        while k < l and nums[k] == nums[k - 1]:
+                            k += 1
+
+                        while k < l and nums[l] == nums[l + 1]:
+                            l -= 1
+
+                    elif total < target:
+                        k += 1
+
+                    else:
+                        l -= 1
+
+        return ans
+```
+
+### Syntax & Inbuilt Features Learned
+
+| Syntax / Feature         | What it means                      |
+| ------------------------ | ---------------------------------- |
+| `nums.sort()`            | Sorts the array in ascending order |
+| Nested `for` loops       | Fix the first two elements         |
+| `k = j + 1`              | Left pointer                       |
+| `l = n - 1`              | Right pointer                      |
+| `while k < l`            | Two-pointer traversal              |
+| `ans.append([...])`      | Store a valid quadruplet           |
+| Duplicate skipping loops | Prevent duplicate quadruplets      |
+
+### Complexity
+
+* **Time:** O(n³)
+* **Space:** O(1) excluding output
+
+### Key Learning
+
+LC 18 is a direct extension of LC 15 (3Sum).
+
+* **2Sum:** Fix 0 elements + Two Pointers / Hashing
+* **3Sum:** Fix 1 element + Two Pointers
+* **4Sum:** Fix 2 elements + Two Pointers
+
+Understanding the 3Sum pattern makes 4Sum much easier to derive. The main challenge is correctly handling duplicate values at every level.
+
+### Mistake I Made
+
+Initially, I compared:
+
+```python
+nums[j] == [j - 1]
+```
+
+instead of:
+
+```python
+nums[j] == nums[j - 1]
+```
+
+I also stored the answer as a tuple instead of a list. After fixing these mistakes, the solution worked correctly.
 
 
 ## Template — copy for every new problem
