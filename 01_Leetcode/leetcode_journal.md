@@ -70,8 +70,9 @@
 | 1833| Maximum Ice Cream Bars  | Medium |        Greedy + Sorting      | No  | Jun 20 |
 | 15  | 3Sum                    | Medium |    Two Pointers + Sorting    | Yes | Jun 21 |
 | 18  | 4Sum                    | Medium |    Two Pointers + Sorting    | No  | Jun 22 |
+| 35  | Search Insert Position  | Easy   | Binary Search / Lower Bound  | No  | Jun 26 |
 
-**Total solved: 60 | Easy: 41 | Medium: 19 | Hard: 0**
+**Total solved: 61 | Easy: 42 | Medium: 19 | Hard: 0**
 ``` 🚀
 
 ---
@@ -3470,6 +3471,88 @@ nums[j] == nums[j - 1]
 ```
 
 I also stored the answer as a tuple instead of a list. After fixing these mistakes, the solution worked correctly.
+
+## LC 35 – Search Insert Position
+
+**Date:** Jun 26, 2026
+**Difficulty:** Easy
+**Pattern:** Binary Search / Lower Bound
+**Hint needed:** No
+
+### Approach
+
+Use binary search to find the **lower bound** of the target.
+
+The lower bound is the first index where:
+
+```python
+nums[index] >= target
+```
+
+Maintain:
+
+* `low = 0`
+* `high = n - 1`
+* `lb = n` (default insertion position if the target is greater than all elements)
+
+During binary search:
+
+* If `nums[mid] >= target`, update `lb = mid` and continue searching on the left.
+* Otherwise, search on the right.
+
+At the end, `lb` is either:
+
+* the index where the target exists, or
+* the correct insertion position.
+
+**Solution:**
+
+```python
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        n = len(nums)
+
+        low = 0
+        high = n - 1
+        lb = n
+
+        while low <= high:
+            mid = (low + high) // 2
+
+            if nums[mid] >= target:
+                lb = mid
+                high = mid - 1
+
+            else:
+                low = mid + 1
+
+        return lb
+```
+
+### Syntax & Inbuilt Features Learned
+
+| Syntax / Feature          | What it means                                                    |
+| ------------------------- | ---------------------------------------------------------------- |
+| `mid = (low + high) // 2` | Finds the middle index                                           |
+| `low <= high`             | Binary search termination condition                              |
+| `nums[mid] >= target`     | Checks if current element can be the lower bound                 |
+| `lb = n`                  | Default insertion position if target is larger than all elements |
+| `high = mid - 1`          | Search left half                                                 |
+| `low = mid + 1`           | Search right half                                                |
+
+### Complexity
+
+* **Time:** O(log n)
+* **Space:** O(1)
+
+### Key Learning
+
+This problem is a classic **Lower Bound** application.
+
+Instead of searching only for the target, binary search can also find the first position where a value can be inserted while maintaining sorted order.
+
+The same lower-bound template is useful in many binary search problems involving insertion positions, first occurrence, and range queries.
+
 
 
 ## Template — copy for every new problem
