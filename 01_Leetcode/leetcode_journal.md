@@ -73,7 +73,7 @@
 | 35  | Search Insert Position  | Easy   | Binary Search / Lower Bound  | No  | Jun 26 |
 
 **Total solved: 61 | Easy: 42 | Medium: 19 | Hard: 0**
-``` 🚀
+``` 🚀.
 
 ---
 
