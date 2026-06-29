@@ -71,8 +71,9 @@
 | 15  | 3Sum                    | Medium |    Two Pointers + Sorting    | Yes | Jun 21 |
 | 18  | 4Sum                    | Medium |    Two Pointers + Sorting    | No  | Jun 22 |
 | 35  | Search Insert Position  | Easy   | Binary Search / Lower Bound  | No  | Jun 26 |
+| 81  | Search in RotatedSorted ArrayII| Medium |BinarySearch(Duplicates)| No | Jun 26 |
 
-**Total solved: 61 | Easy: 42 | Medium: 19 | Hard: 0**
+**Total solved: 62 | Easy: 42 | Medium: 20 | Hard: 0**
 ``` 🚀.
 
 ---
@@ -3553,6 +3554,91 @@ Instead of searching only for the target, binary search can also find the first 
 
 The same lower-bound template is useful in many binary search problems involving insertion positions, first occurrence, and range queries.
 
+## LC 81 – Search in Rotated Sorted Array II
+
+**Date:** Jun 26, 2026
+**Difficulty:** Medium
+**Pattern:** Binary Search on Rotated Sorted Array (Duplicates)
+**Hint needed:** No
+
+### Approach
+
+This problem is an extension of **LC 33**, where the array may contain duplicate values.
+
+* Perform binary search.
+* If the middle element is the target, return `True`.
+* When `nums[low] == nums[mid] == nums[high]`, it is impossible to determine which half is sorted because of duplicates. Shrink the search space by incrementing `low` and decrementing `high`.
+* Otherwise:
+
+  * If the right half is sorted, check whether the target lies in that range.
+  * Else, the left half is sorted, so check whether the target lies there.
+* Continue until the target is found or the search space becomes empty.
+
+**Solution:**
+
+```python
+class Solution:
+    def search(self, nums: List[int], target: int) -> bool:
+        n = len(nums)
+        low, high = 0, n - 1
+
+        while low <= high:
+            mid = (low + high) // 2
+
+            if nums[mid] == target:
+                return True
+
+            if nums[low] == nums[mid] == nums[high]:
+                low += 1
+                high -= 1
+                continue
+
+            if nums[mid] <= nums[high]:
+                if nums[mid] <= target <= nums[high]:
+                    low = mid + 1
+                else:
+                    high = mid - 1
+            else:
+                if nums[low] <= target <= nums[mid]:
+                    high = mid - 1
+                else:
+                    low = mid + 1
+
+        return False
+```
+
+### Syntax & Inbuilt Features Learned
+
+| Syntax / Feature                       | What it means                                               |
+| -------------------------------------- | ----------------------------------------------------------- |
+| `nums[low] == nums[mid] == nums[high]` | Detects when duplicates prevent identifying the sorted half |
+| `continue`                             | Skip to the next iteration after shrinking the search space |
+| `nums[mid] <= nums[high]`              | Checks if the right half is sorted                          |
+| `nums[low] <= target <= nums[mid]`     | Checks whether the target lies in the sorted left half      |
+| `low = mid + 1`                        | Search the right half                                       |
+| `high = mid - 1`                       | Search the left half                                        |
+
+### Complexity
+
+* **Average Time:** O(log n)
+* **Worst Time:** O(n) (when many duplicate elements force shrinking from both ends)
+* **Space:** O(1)
+
+### Key Learning
+
+The only difference between **LC 33** and **LC 81** is the presence of duplicates.
+
+When:
+
+```python
+nums[low] == nums[mid] == nums[high]
+```
+
+you cannot determine which half is sorted. The solution is to shrink both ends until a sorted half can be identified, then continue with normal binary search.
+
+### Mistake I Made
+
+None. My implementation was correct. The main challenge was understanding why duplicates make it impossible to identify the sorted half in certain cases, which requires shrinking both boundaries before proceeding.
 
 
 ## Template — copy for every new problem
