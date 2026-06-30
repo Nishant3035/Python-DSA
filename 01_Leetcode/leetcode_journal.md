@@ -71,9 +71,10 @@
 | 15  | 3Sum                    | Medium |    Two Pointers + Sorting    | Yes | Jun 21 |
 | 18  | 4Sum                    | Medium |    Two Pointers + Sorting    | No  | Jun 22 |
 | 35  | Search Insert Position  | Easy   | Binary Search / Lower Bound  | No  | Jun 26 |
-| 81  | Search in RotatedSorted ArrayII| Medium |BinarySearch(Duplicates)| No | Jun 26 |
+| 81  | Search in RotatedSorted ArrayII| Medium |BinarySearch(Duplicates)| No | Jun 29 |
+| 876 | Middle of the Linked List | Easy |      Fast & Slow Pointers     | No | Jun 30 |
 
-**Total solved: 62 | Easy: 42 | Medium: 20 | Hard: 0**
+**Total solved: 63 | Easy: 43 | Medium: 20 | Hard: 0**
 ``` 🚀.
 
 ---
@@ -3556,7 +3557,7 @@ The same lower-bound template is useful in many binary search problems involving
 
 ## LC 81 – Search in Rotated Sorted Array II
 
-**Date:** Jun 26, 2026
+**Date:** Jun 29, 2026
 **Difficulty:** Medium
 **Pattern:** Binary Search on Rotated Sorted Array (Duplicates)
 **Hint needed:** No
@@ -3639,6 +3640,95 @@ you cannot determine which half is sorted. The solution is to shrink both ends u
 ### Mistake I Made
 
 None. My implementation was correct. The main challenge was understanding why duplicates make it impossible to identify the sorted half in certain cases, which requires shrinking both boundaries before proceeding.
+
+## LC 876 – Middle of the Linked List
+
+**Date:** Jun 30, 2026
+**Difficulty:** Easy
+**Pattern:** Fast & Slow Pointers (Tortoise and Hare)
+**Hint needed:** No
+
+### Approach
+
+Use two pointers:
+
+* `slow` moves **one step** at a time.
+* `fast` moves **two steps** at a time.
+
+As `fast` reaches the end of the linked list, `slow` will be pointing to the middle node.
+
+For an even-length linked list, this approach naturally returns the **second middle node**, which is required by the problem.
+
+**Solution:**
+
+```python
+class Solution:
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        slow = head
+        fast = head
+
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+
+        return slow
+```
+
+### Syntax & Inbuilt Features Learned
+
+| Syntax / Feature                                   | What it means                                   |
+| -------------------------------------------------- | ----------------------------------------------- |
+| `slow = head`                                      | Slow pointer starts from the head               |
+| `fast = head`                                      | Fast pointer starts from the head               |
+| `while fast is not None and fast.next is not None` | Ensures `fast.next.next` can be accessed safely |
+| `slow = slow.next`                                 | Move slow pointer by one node                   |
+| `fast = fast.next.next`                            | Move fast pointer by two nodes                  |
+| `return slow`                                      | Returns the middle node of the linked list      |
+
+### Complexity
+
+* **Time:** O(n)
+* **Space:** O(1)
+
+### Key Learning
+
+The **Fast & Slow Pointer** technique is one of the most important linked list patterns.
+
+Whenever one pointer moves twice as fast as the other:
+
+* Fast reaches the end.
+* Slow automatically reaches the middle.
+
+This same technique is also used in problems like:
+
+* Detect Cycle in Linked List (LC 141)
+* Linked List Cycle II (LC 142)
+* Happy Number (LC 202)
+* Find the Start of a Cycle
+
+### Mistake I Made
+
+Initially, I wrote:
+
+```python
+while fast is not None and fast.next is None:
+```
+
+This condition is incorrect because it enters the loop only when `fast.next` is `None`, but inside the loop I accessed:
+
+```python
+fast.next.next
+```
+
+which would be invalid.
+
+The correct condition is:
+
+```python
+while fast is not None and fast.next is not None:
+```
+
+to ensure `fast.next.next` can be accessed safely.
 
 
 ## Template — copy for every new problem
