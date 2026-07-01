@@ -73,8 +73,9 @@
 | 35  | Search Insert Position  | Easy   | Binary Search / Lower Bound  | No  | Jun 26 |
 | 81  | Search in RotatedSorted ArrayII| Medium |BinarySearch(Duplicates)| No | Jun 29 |
 | 876 | Middle of the Linked List | Easy |      Fast & Slow Pointers     | No | Jun 30 |
+| 141 | Linked List Cycle | Easy | Fast & Slow Pointers (Floyd'sAlgorithm)| No | Jul 1 |
 
-**Total solved: 63 | Easy: 43 | Medium: 20 | Hard: 0**
+**Total solved: 64 | Easy: 44 | Medium: 20 | Hard: 0**
 ``` 🚀.
 
 ---
@@ -3729,6 +3730,80 @@ while fast is not None and fast.next is not None:
 ```
 
 to ensure `fast.next.next` can be accessed safely.
+
+
+## LC 141 – Linked List Cycle
+
+**Date:** July 1, 2026
+**Difficulty:** Easy
+**Pattern:** Fast & Slow Pointers (Floyd's Cycle Detection)
+**Hint needed:** No
+
+### Approach
+
+Use two pointers:
+
+* `slow` moves **one node** at a time.
+* `fast` moves **two nodes** at a time.
+
+If the linked list contains a cycle, the fast pointer will eventually catch up with the slow pointer, meaning both pointers will point to the same node.
+
+If the fast pointer reaches the end of the list (`None`), then there is no cycle.
+
+**Solution:**
+
+```python
+class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        slow = head
+        fast = head
+
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+
+            if slow == fast:
+                return True
+
+        return False
+```
+
+### Syntax & Inbuilt Features Learned
+
+| Syntax / Feature                                   | What it means                                         |
+| -------------------------------------------------- | ----------------------------------------------------- |
+| `slow = head`                                      | Initialize slow pointer                               |
+| `fast = head`                                      | Initialize fast pointer                               |
+| `while fast is not None and fast.next is not None` | Ensures the fast pointer can safely move two steps    |
+| `slow = slow.next`                                 | Move slow pointer by one node                         |
+| `fast = fast.next.next`                            | Move fast pointer by two nodes                        |
+| `if slow == fast`                                  | Checks whether both pointers meet, indicating a cycle |
+| `return True`                                      | Cycle detected                                        |
+| `return False`                                     | No cycle exists                                       |
+
+### Complexity
+
+* **Time:** O(n)
+* **Space:** O(1)
+
+### Key Learning
+
+This problem uses **Floyd's Cycle Detection Algorithm (Tortoise and Hare Algorithm)**.
+
+The intuition is:
+
+* If there is **no cycle**, the fast pointer reaches `None`.
+* If there **is a cycle**, the fast pointer eventually laps the slow pointer and both pointers meet.
+
+This pattern is also used in:
+
+* LC 876 – Middle of the Linked List
+* LC 142 – Linked List Cycle II
+* LC 202 – Happy Number
+
+### Mistake I Made
+
+None. I correctly used the Fast & Slow Pointer approach and compared the pointers after moving them to detect the cycle.
 
 
 ## Template — copy for every new problem
